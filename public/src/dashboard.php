@@ -84,7 +84,7 @@
                     </div>
 
                     <div class="right pr-2 pl-2 bg-green-100 w-fit rounded-lg flex items-center border border-green-300">
-                        <span class="text-green-800 font-inter text-xl">+10.05%</span>
+                        <span class="text-green-800 font-inter text-xl">+10%</span>
                     </div>
                 </div>
             </div>
