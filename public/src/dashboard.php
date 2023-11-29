@@ -20,7 +20,7 @@
 
     <?php
     include '../../includes/dashboard_navigation.php';
-    require '../../app/controllers/dashboard_script.php';
+    require '../../app/controllers/Dashboard/dashboard_script.php';
     ?>
     <main class=" mt-14 p-12 ml-0 smXl:ml-64  dark:border-gray-700">
 
