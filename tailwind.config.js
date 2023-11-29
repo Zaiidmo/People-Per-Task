@@ -1,6 +1,6 @@
 /* @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{html,js}", "./node_modules/flowbite/**/*.js"],
+  content: ["./public/src/**/*.{html,js,php}", "./node_modules/flowbite/**/*.js"],
   plugins: [
     require('@tailwindcss/forms'),
   ],

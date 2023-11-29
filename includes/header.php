@@ -5,7 +5,7 @@
       >
         <a href="../src/index.php" class="flex items-center ">
           <img
-            src="../images/logo.webp"
+            src="../assets/images/logo.webp"
             class="mr-3 h-6 sm:h-9"
             alt="peoplepertask Logo"
           >
@@ -187,5 +187,5 @@
   </header>
   
   <?php
-    include 'D:\GITREPOS\PeoplePerTask\DataBASE\Connect.php'
+    require 'D:\GITREPOS\PeoplePerTask-full\config\Connect.php'
   ?>
