@@ -32,17 +32,19 @@ function display_freelancer()
                         <?= $email ?>
                     </td>
                     <td class="flex px-6 py-4 dark:text-white">
-                        <form action="./editfreelancer.php" method="POST" class="w-full">
+                        <button class="editfreelancer w-full self-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm py-2 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Edit user</button>
+                        <!-- <form action="" method="POST" class="w-full">
                             <input type="number" name="id" class="hidden" id="id" value="<?= $id ?>">
-                            <button class="editfreelancer w-full self-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm py-2 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Edit user</button>
-                        </form>
+
+                        </form> -->
                     </td>
                     <td class=" px-4 py-4 dark:text-white">
-                        <a href="freelancers.php?id=<?= $id ?>" onclick="return confirmDelete()" class="text-primary-600 dark:text-primary-600 hover:underline hover:text-blue-900">
-                            Remove Freelancer
-                            <?= remove_freelancer() ?>
+                        <a href="../../app/controllers/Dashboard/remove.php?id=<?= $id ?>" onclick="return confirmDelete()" class="w-full">
+                            <button id="removefreelancer" class="w-full text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm py-2 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Remove user</button>
                         </a>
                     </td>
+
+
                 </tr>
 <?php
             }
@@ -75,8 +77,8 @@ function add_freelancer()
 
             if (mysqli_query($conn, $insertQuery)) {
                 echo "New record added successfully";
-                // Redirect back to the form page
-                // header("location:freelancers.php");
+                // Redirect back to the freelancers page using JS
+                echo '<script>window.location.href = "freelancers.php";</script>';
             } else {
                 echo "Error: " . mysqli_error($conn);
             }
@@ -88,18 +90,10 @@ function add_freelancer()
     }
 }
 
-// Function to delete freelancer 
-function remove_freelancer()
+// Function to edit freelancer 
+function edit_freelancer()
 {
     global $conn;
-    $id = $_GET['id'];
-
-    $sql = "DELETE from freelances where FreelanceID = $id";
-    $res = mysqli_query($conn, $sql);
-
-    if (!$res) {
-        echo 'Error Query' ;
-    }
 }
-
-//Function to Edit Freelancer 
+?>
+<script src="../assets/js/editfreelancer.js"></script>
