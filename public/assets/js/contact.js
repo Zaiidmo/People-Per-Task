@@ -1,51 +1,70 @@
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('form');
 
-const form = document.getElementById("form");
-const message = document.getElementById("Message");
+        form.addEventListener('submit', function (event) {
+            // Prevent the form from submitting
+            event.preventDefault();
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  console.log(e);
-  let name = e.target.nom.value
-  let phone = e.target.num.value
-  let email = e.target.subject.value
-  let message = e.target.Message.value
-  console.log(name);
- 
+            // Validate the form fields
+            if (!validateName() || !validatePhone() || !validateEmail() || !validateMessage()) {
+                return;
+            }
 
-  
-  const emailError = document.querySelector("#email-error");
-  const nameError = document.querySelector("#name-error");
-  const phoneError = document.querySelector("#phone-error");
-  const messageError = document.querySelector("#text-error");
- 
+            // If all validations pass, you can submit the form
+            form.submit();
+        });
 
-  
-  const emailRegex = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/;
-  const nameRegex = /^[A-Za-zs]+$/;
-  const phoneRegex = /^\d+$/;
-  const textRegex = /^[A-Za-zs]+$/;
-  
-  if(!nameRegex.test(name)){
-  
-    
-   
-     nameError.classList.toggle("hidden")
-    
-  }
-  if(!emailRegex.test(email)){
- 
-    
-    emailError.classList.toggle("hidden")
-  }
-  if(!phoneRegex.test(phone)){
+        function validateName() {
+            const nameInput = document.getElementById('name');
+            const nameError = document.getElementById('name-error');
 
-    
-    phoneError.classList.toggle("hidden")
-  }
-  if(!textRegex.test(message)){
+            if (nameInput.value.trim() === '') {
+                nameError.classList.remove('hidden');
+                return false;
+            } else {
+                nameError.classList.add('hidden');
+                return true;
+            }
+        }
 
-    
-    messageError.classList.toggle("hidden")
-  }
- 
-})
+        function validatePhone() {
+            const phoneInput = document.getElementById('phone');
+            const phoneError = document.getElementById('phone-error');
+            const phoneRegex = /^\d{10}$/;
+
+            if (!phoneRegex.test(phoneInput.value.trim())) {
+                phoneError.classList.remove('hidden');
+                return false;
+            } else {
+                phoneError.classList.add('hidden');
+                return true;
+            }
+        }
+
+        function validateEmail() {
+            const emailInput = document.getElementById('subject');
+            const emailError = document.getElementById('email-error');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailRegex.test(emailInput.value.trim())) {
+                emailError.classList.remove('hidden');
+                return false;
+            } else {
+                emailError.classList.add('hidden');
+                return true;
+            }
+        }
+
+        function validateMessage() {
+            const messageInput = document.getElementById('Message');
+            const messageError = document.getElementById('text-error');
+
+            if (messageInput.value.trim() === '') {
+                messageError.classList.remove('hidden');
+                return false;
+            } else {
+                messageError.classList.add('hidden');
+                return true;
+            }
+        }
+    });
