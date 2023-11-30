@@ -6,7 +6,7 @@ use PHPMailer\PHPMailer\Exception;
 
 //Load Composer's autoloader
 require 'mailer/autoload.php';
-
+try {
 $mail = new PHPMailer();
 
     $mail->isSMTP();
@@ -18,5 +18,7 @@ $mail = new PHPMailer();
     $mail->Port       = 465;     
     
     $mail->isHTML(true);
-
+} catch (Exception $e){
+    echo "Mailer Error: " . $mail->ErrorInfo;
+}
 

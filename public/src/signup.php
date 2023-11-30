@@ -39,7 +39,7 @@
           <span class="text-red-600 hidden" id="password-error">no valid</span>
         </div>
         <div class="sm:col-span-2">
-          <input id="passwordConfirm" rows="6" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-3xl shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Confirm password">
+          <input type="password" id="Confirm_password" class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-3xl border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="Confirm Password">
           <span class="text-red-600 hidden" id="confirm-error">no valid</span>
         </div>
         <div class="flex justify-center">

@@ -40,7 +40,7 @@
           <textarea id="Message" name="message" rows="6" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-3xl shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Let talk about your idea"></textarea>
           <span class=" text-red-600 hidden" id="text-error">Message not valid</span>
         </div>
-        <button type="submit" class="py-3 px-5 text-sm font-medium text-center text-white rounded-3xl bg-orange-600 w-60 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 self-center  ">S U B M I T </button>
+        <button class="py-3 px-5 text-sm font-medium text-center text-white rounded-3xl bg-orange-600 w-60 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 self-center  ">S U B M I T </button>
       </form>
 
 
@@ -51,9 +51,75 @@
   <!---------------------------------------------->
   <!-- Footer section -->
   <?php include '../../includes/footer.php'; ?>
+  <script>
+    const form = document.getElementById('form');
 
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      if (!validateName() || !validatePhone() || !validateEmail() || !validateMessage()) {
+        return;
+      }
+
+      form.submit();
+    });
+
+    function validateName() {
+      const nameInput = document.getElementById('name');
+      const nameError = document.getElementById('name-error');
+
+      if (!nameInput || nameInput.value.trim() === '') {
+        nameError.classList.remove('hidden');
+        return false;
+      } else {
+        nameError.classList.add('hidden');
+        return true;
+      }
+    }
+
+    function validatePhone() {
+      const phoneInput = document.getElementById('phone');
+      const phoneError = document.getElementById('phone-error');
+      const phoneRegex = /^\d{10}$/;
+
+      if (!phoneInput || !phoneRegex.test(phoneInput.value.trim())) {
+        phoneError.classList.remove('hidden');
+        return false;
+      } else {
+        phoneError.classList.add('hidden');
+        return true;
+      }
+    }
+
+    function validateEmail() {
+      const emailInput = document.getElementById('subject');
+      const emailError = document.getElementById('email-error');
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!emailInput || !emailRegex.test(emailInput.value.trim())) {
+        emailError.classList.remove('hidden');
+        return false;
+      } else {
+        emailError.classList.add('hidden');
+        return true;
+      }
+    }
+
+    function validateMessage() {
+      const messageInput = document.getElementById('Message');
+      const messageError = document.getElementById('text-error');
+
+      if (!messageInput || messageInput.value.trim() === '') {
+        messageError.classList.remove('hidden');
+        return false;
+      } else {
+        messageError.classList.add('hidden');
+        return true;
+      }
+    }
+  </script>
   <script src="../assets/js/theme.js"></script>
-  <script src="../assets/js/contact.js"></script>
+  <!-- <script src="../assets/js/contact.js"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
   <!-- <script src="jquery.js"></script> -->
 
