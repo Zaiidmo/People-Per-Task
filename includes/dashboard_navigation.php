@@ -12,7 +12,7 @@
                     </svg>
                 </button>
 
-                <a href=".../src/index.php" class="flex ml-2 md:mr-24  items-center">
+                <a href="../src/index.php" class="flex ml-2 md:mr-24  items-center">
                     <img src="../assets/images/logo.webp" class="h-8 mr-6" alt="peoplepertask Logo">
                     <span class="font-inter font-semibold dark:text-white">PeaplePerTask</span>
                 </a>
