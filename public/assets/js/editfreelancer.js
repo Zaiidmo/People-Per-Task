@@ -24,86 +24,92 @@
 // });
 
 
-    // document.addEventListener('DOMContentLoaded', function () {
-    //     var modal = document.getElementById('modification-modal');
-    //     var editButtons = document.querySelectorAll('.editfreelancer');
-    //     var closeButton = document.getElementById('close');
-    //     function toggleModal() {
-    //     modal.classList.toggle('hidden');
-    //     }
+window.onload = function () {
+    let modal = document.getElementById('modification-modal');
+    let editButtonsContainer = document.querySelector('.edit-buttons-container');
+    let closeButton = document.getElementById('close');
 
-    //     // Attach event listeners to each edit button
-    //     editButtons.forEach(function (button) {
-    //         button.addEventListener('click', function () {
-    //             toggleModal();
-    //         });
-    //     });
+    function toggleModal() {
+        modal.classList.toggle('hidden');
+    }
 
-    //     // Event listener for the close button
-    //     closeButton.addEventListener('click', function () {
-    //         toggleModal();
-    //     });
+    // Event delegation for edit buttons
+    editButtonsContainer.addEventListener('click', function (event) {
+        if (event.target.classList.contains('editfreelancer')) {
+            toggleModal();
+        }
+    });
 
-    //     // Close the modal if the user clicks outside it
-    //     window.addEventListener("click", function (event) {
-    //         if (event.target == modal) {
-    //             toggleModal();
-    //         }
-    //     });
-    // });
+    // Event listener for the close button
+    closeButton.addEventListener('click', function () {
+        toggleModal();
+    });
+
+    // Close the modal if the user clicks outside it
+    window.addEventListener('click', function (event) {
+        if (event.target === modal) {
+            toggleModal();
+        }
+    });
+
+    // Close the modal on 'Esc' key press
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+            toggleModal();
+        }
+    });
+};
+
         
-        var modal_validation = document.getElementsByClassName("modal_validation")[0];
-        var modal_update = document.getElementsByClassName("modal_update")[0];
-        var modal = document.getElementById("myModal");
-        var span = document.getElementsByClassName("close")[0];
-        span.onclick = function() {
-            modal.style.display = "none";
-            modal_validation.style.display = "none";
-        }
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-            if (event.target == modal_validation) {
-                modal_validation.style.display = "none";
-            }
-            if (event.target == modal_update) {
-                modal_update.style.display = "none";
-            }
-        }
-        function remove_category(id,type){
-            modal_validation.style.display = "block";
-            if(type=='category'){
-                document.getElementById('id_catg').value=id;
-                document.getElementById('action').value='remove_category';
-            } 
-            else{
-                document.getElementById('id_catg').value=id;
-                document.getElementById('action').value='remove_sous_category';
-            }
-        }
-        function update_category(id,name,type,id_catg=null,name_catg=null){
-            modal_update.style.display = "block";
-            document.getElementById('id_catg').value=id;
-            if(type=='update_category'){
-                document.getElementById('action').value='update_category';
-                document.getElementById('select_update').style.display='none';
-                document.getElementById('name_catg').value=name;
-            } 
-            else{
-                document.getElementById('action').value='update_sous_category';
-                document.getElementById('select_update').style.display='block';
-                document.getElementById('name_catg').value=name;
-                document.getElementById('id_catg_selected').value=id_catg;
-                document.getElementById('id_catg_selected').textContent=name_catg;
-            }
-        }
+        // var modal_validation = document.getElementsByClassName("modal_validation")[0];
+        // var modal_update = document.getElementsByClassName("modal_update")[0];
+        // var modal = document.getElementById("myModal");
+        // var span = document.getElementsByClassName("close")[0];
+        // span.onclick = function() {
+        //     modal.style.display = "none";
+        //     modal_validation.style.display = "none";
+        // }
+        // window.onclick = function(event) {
+        //     if (event.target == modal) {
+        //         modal.style.display = "none";
+        //     }
+        //     if (event.target == modal_validation) {
+        //         modal_validation.style.display = "none";
+        //     }
+        //     if (event.target == modal_update) {
+        //         modal_update.style.display = "none";
+        //     }
+        // }
+        // function remove_category(id,type){
+        //     modal_validation.style.display = "block";
+        //     if(type=='category'){
+        //         document.getElementById('id_catg').value=id;
+        //         document.getElementById('action').value='remove_category';
+        //     } 
+        //     else{
+        //         document.getElementById('id_catg').value=id;
+        //         document.getElementById('action').value='remove_sous_category';
+        //     }
+        // }
+        // function update_category(id,name,type,id_catg=null,name_catg=null){
+        //     modal_update.style.display = "block";
+        //     document.getElementById('id_catg').value=id;
+        //     if(type=='update_category'){
+        //         document.getElementById('action').value='update_category';
+        //         document.getElementById('select_update').style.display='none';
+        //         document.getElementById('name_catg').value=name;
+        //     } 
+        //     else{
+        //         document.getElementById('action').value='update_sous_category';
+        //         document.getElementById('select_update').style.display='block';
+        //         document.getElementById('name_catg').value=name;
+        //         document.getElementById('id_catg_selected').value=id_catg;
+        //         document.getElementById('id_catg_selected').textContent=name_catg;
+        //     }
+        // }
 
-        <?php if(isset($_GET['msg'])){ ?>
-            history.pushState({}, document.title, 'category.php');
-        <?php } ?>
         
-        document.getElementById('cancel_btn').addEventListener('click',()=>{
-            modal_validation.style.display = "none";
-        });
+        // document.getElementById('cancel_btn').addEventListener('click',()=>{
+        //     modal_validation.style.display = "none";
+        // });
 
