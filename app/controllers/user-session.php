@@ -12,7 +12,7 @@ function signup()
 {
     global $conn;
 
-    $username = $_POST['first_name'] . $_POST['last_name'];
+    $username = $_POST['first_name'] . "_" . $_POST['last_name'];
     $email = $_POST['email'];
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
     $password_confirmation = $_POST['repeat_password'];
@@ -55,6 +55,7 @@ function login()
         if ($pwdCheck == true) {
             $_SESSION['UserID'] = $row['UserID'];
             $_SESSION['UserName'] = $row['UserName'];
+            $_SESSION['Email']= $row['Email'];
             if (isset($_POST['email'])) {
                 setcookie('email', $email, time() + 5 * 60, '/');
                 setcookie('password', $password, time() + 5 * 60, '/');
