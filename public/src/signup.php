@@ -21,7 +21,7 @@
       <h2 class=" mb-16 text-5xl tracking-tight  text-center text-gray-900 dark:text-white  font-semibold"> Sign <span class="text-orange-500 text-semibold">Up</span></h2>
       <p class="m-4 text-dark text-2xl font-popping dark:text-white ">Welcome </p>
       <!--  Form signUp -->
-      <form action="#" class="space-y-8 " id="form">
+      <form action="../../app/controllers/signup.php" methode="POST" class="space-y-8 " id="form">
         <div>
           <input type="text" id="nom" class="shadow-sm bg-gray-50 border border-gray-300  text-gray-900 text-sm rounded-3xl focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light " placeholder="First-name">
           <span class="text-red-600 hidden " id="name-error">no valid</span>
