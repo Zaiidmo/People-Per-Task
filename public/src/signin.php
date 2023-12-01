@@ -22,16 +22,16 @@
       <form action="../../app/controllers/user-session.php" method="POST" class="space-y-8 flex flex-col justify-evenly" id="form">
         <div>
           <input type="email" id="email" name="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-3xl focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light " placeholder="Email">
-          <span class="text-red-600 hidden" id="email-error">No valid</span>
+          <span class="text-red-600 hidden" id="email-error">Invalid Email</span>
         </div>
         <div>
           <input type="password" id="password" name="password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-3xl focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="Password">
-          <span class="text-red-600 hidden" id="password-error">No valid</span>
+          <span class="text-red-600 hidden" id="password-error">Invalid Password</span>
         </div>
         <div class="flex justify-center ">
-          <div> <button type="submit" name="login" class="py-3 px-5 text-sm font-medium text-center text-white rounded-3xl bg-orange-600 w-60 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800   ">login</button>
+          <div>
+            <button type="submit" name="login" class="py-3 px-5 text-sm font-medium text-center text-white rounded-3xl bg-orange-600 w-60 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800   ">login</button>
           </div>
-
         </div>
       </form>
       <div class=" flex justify-center ">
@@ -50,7 +50,7 @@
 
 </body>
 <script src="../assets/js/theme.js"></script>
-<!-- <script src="../assets/js/signin.js"></script> -->
+<script src="../assets/js/signin.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
 
 </html>

@@ -1,33 +1,36 @@
-
 const form = document.getElementById("form");
 
 form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  console.log(e);
+  let password = e.target.password.value;
+  let email = e.target.email.value;
 
-  let password = e.target.password.value
-  let email = e.target.email.value
- 
-  console.log(password);
- 
-
-  
   const emailError = document.querySelector("#email-error");
   const passwordError = document.querySelector("#password-error");
-  
 
-  
-  const emailRegex = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/;
-  const passwordRegex = /^[A-Za-zs]+$/;
-  
-  
-  if(!passwordRegex.test(password)){
-     passwordError.classList.toggle("hidden")
-    
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+  // Reset errors
+  emailError.classList.add("hidden");
+  passwordError.classList.add("hidden");
+
+  let isValid = true;
+
+  if (!passwordRegex.test(password)) {
+    passwordError.classList.remove("hidden");
+    isValid = false;
   }
 
-  if(!emailRegex.test(email)){
-    emailError.classList.toggle("hidden")
+  if (!emailRegex.test(email)) {
+    emailError.classList.remove("hidden");
+    isValid = false;
   }
-  
-})
+
+  // If the form is valid, submit it programmatically
+  if (isValid) {
+    form.submit();
+  } else {
+    // If the form is not valid, prevent default submission
+    e.preventDefault();
+  }
+});
