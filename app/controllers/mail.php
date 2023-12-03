@@ -5,15 +5,15 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 //Load Composer's autoloader
-require 'mailer/autoload.php';
+require './mailer/autoload.php';
 try {
 $mail = new PHPMailer();
 
     $mail->isSMTP();
-    $mail->Host       = 'smtp.example.com';
+    $mail->Host       = 'smtp.gmail.com';
     $mail->SMTPAuth   = true;
     $mail->Username   = 'zaiidmoumnii@gmail.com';
-    $mail->Password   = 'euoh dsau jysj cqwg ';
+    $mail->Password   = 'kbfk dewe qbqm bkot';
     $mail->SMTPSecure = 'ssl';
     $mail->Port       = 465;     
     
