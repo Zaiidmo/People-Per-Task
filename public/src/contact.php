@@ -51,6 +51,11 @@
   <!-- Footer section -->
   <?php include '../../includes/footer.php'; ?>
   <script src="../assets/js/theme.js"></script>
+  <?php
+  if ($mail->send()) {
+    echo '<script>alert("Your message has been sent successfully")</script>';
+  }
+  ?>
   <!-- <script src="../assets/js/contact.js"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
   <!-- <script src="jquery.js"></script> -->

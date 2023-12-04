@@ -25,6 +25,6 @@ if (empty($_POST["name"]) || empty($_POST["phone"]) || empty($_POST["email"]) ||
     if (!$mail->send()) {
         echo 'Mailer Error: ' . $mail->ErrorInfo;
     } else {
-        echo 'Message sent!';
+        header('Location: ../../public/src/index.php');
     }
 }
