@@ -1,6 +1,6 @@
 <header>
-  <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 fixed w-[100%] z-10 top-0 ">
-    <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+  <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 fixed w-full z-10 top-0 ">
+    <div class="flex flex-wrap w-full justify-between items-center mx-auto max-w-screen-xl">
       <a href="../src/index.php" class="flex items-center ">
         <img src="../assets/images/logo.webp" class="mr-3 h-6 sm:h-9" alt="peoplepertask Logo">
         <span class="self-center hidden sm:block lg:text-l font-inter font-semibold whitespace-nowrap dark:text-white">PeoplePerTask</span>
