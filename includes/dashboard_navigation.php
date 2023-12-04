@@ -17,7 +17,6 @@
                     <span class="font-inter font-semibold dark:text-white">PeaplePerTask</span>
                 </a>
             </div>
-            <?php session_start() ?>
             <div class="flex items-center">
                 <div class="flex relative items-center ml-3">
 
