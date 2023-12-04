@@ -69,7 +69,7 @@
 
                 <div class="mt-10 self-center w-1/2">
                     <form class="space-y-6" action="" method="POST">
-                        <input type="number" name="id" class="hidden" value="<?= $id ?>">
+                        <input type="number" name="id" id="FreelanceID" class="hidden" value="<?= $id ?>">
                         <div>
                             <label for="Freelance_name" class="block text-sm font-medium leading-6">New Freelancer Name</label>
                             <div class="mt-2">
