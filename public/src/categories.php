@@ -99,6 +99,8 @@
 </body>
 <script src="../assets/js/theme.js"></script>
 <script src="../assets/js/dashboard.js"></script>
+<script src="../assets/js/navigation.js"></script>
+
 <script>
     function confirmDelete() {
         var confirmation = confirm(`Are you sure you want to delete this Category?`);

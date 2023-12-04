@@ -105,14 +105,13 @@
 
     </main>
     <script src="../assets/js/theme.js"></script>
-    <script src="../assets/js/editfreelancer.js"></script>
     <script>
         function confirmDelete() {
             var confirmation = confirm(`Are you sure you want to delete this Freelancer?`);
             return confirmation;
         }
     </script>
-    <script src="../assets/js/editfreelancer.js"></script>
+    <script src="../assets/js/navigation.js"></script>
 
 </body>
 

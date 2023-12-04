@@ -141,6 +141,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="../assets/js/Navigation.js"></script>
     <script src="../assets/js/theme.js"></script>
     <script src="../assets/js/dashboard.js"></script>
 </body>
