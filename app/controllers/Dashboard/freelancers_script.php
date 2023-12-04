@@ -1,8 +1,12 @@
 <?php
 require 'D:\GITREPOS\PeoplePerTask-full\config\Connect.php';
+global $id;
+
+
 //Function to Read freelancers Data 
 function display_freelancer()
 {
+    global $id;
     global $conn;
     $sql = "SELECT freelances.*, users.email FROM freelances
     LEFT JOIN users ON freelances.UserID = users.UserID";
@@ -32,11 +36,7 @@ function display_freelancer()
                         <?= $email ?>
                     </td>
                     <td class="flex px-6 py-4 dark:text-white">
-                        <button class="editfreelancer w-full self-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm py-2 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Edit user</button>
-                        <!-- <form action="" method="POST" class="w-full">
-                            <input type="number" name="id" class="hidden" id="id" value="<?= $id ?>">
-
-                        </form> -->
+                        <button id="editbutton" class="editfreelancer w-full self-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm py-2 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Edit user</button>
                     </td>
                     <td class=" px-4 py-4 dark:text-white">
                         <a href="../../app/controllers/Dashboard/remove.php?id=<?= $id ?>" onclick="return confirmDelete()" class="w-full">
@@ -94,6 +94,47 @@ function add_freelancer()
 function edit_freelancer()
 {
     global $conn;
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Retrieve form data
+        $freelanceId = $_POST['id'];
+        $newFreelancerName = $_POST['New_Freelancer_Name'];
+        $newCompetences = $_POST['New_Competences'];
+        $New_username = $_POST['New_username'];
+    
+        $findIDQuery = "SELECT UserID FROM users WHERE UserName = '$New_username'";
+        $result = mysqli_query($conn, $findIDQuery);
+    
+        if ($result) {
+            $row = mysqli_fetch_assoc($result);
+            $userID = $row['UserID'];
+                // Perform the database update
+            $query="UPDATE freelances 
+                    SET 
+                        FreelanceName = '$newFreelancerName',
+                        Competences = '$newCompetences',
+                        UserID = '$userID'
+                    WHERE 
+                        FreelanceID = '$freelanceId';
+                    ";
+    
+                if (mysqli_query($conn, $query)) {
+                    echo "Edited Successfully";
+                    // Redirect back to the form page
+                    echo "<script> window.location.href = '../../../public/src/freelancers.php'</script>";
+                    exit;
+                } else {
+                    echo "Error: " . mysqli_error($conn);
+                }
+            // Free result set
+            mysqli_free_result($result);
+        } else {
+            echo "Error: " . mysqli_error($conn);
+        }
+    } else {
+        // If the form is not submitted, redirect to the form page
+        echo "<script> window.location.href = '../../../public/src/freelancers.php'</script>";
+        exit;
+    }
 }
 ?>
-<script src="../assets/js/editfreelancer.js"></script>

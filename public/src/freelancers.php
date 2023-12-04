@@ -33,49 +33,6 @@
                     + Add Freelancer
                 </button>
             </a>
-            <!-- Modification Modal -->
-            <div id="modification-modal" class="modification_modal hidden bg-white rounded-2xl m-10 shadow dark:bg-gray-700">
-                <div aria-hidden="true" class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 text-gray-900 dark:text-white">
-                    <div class=" sm:mx-auto sm:w-full sm:max-w-sm lg:w-full flex gap-16 items-center">
-                        <!-- <img class="mx-auto h-10 w-auto" src="../assets/images/logo.webp" alt="People Per Task"> -->
-                        <h2 class="self-center font-poppins text-center text-4xl font-bold leading-9 tracking-wider">Edit a Freelancer</h2>
-                        <span class="close cursor-pointer">&times;</span>
-                    </div>
-
-                    <div class="mt-10 self-center w-1/2">
-                        <form class="space-y-6" action="#" method="POST">
-                            <div>
-                                <label for="Freelance_name" class="block text-sm font-medium leading-6">New Freelancer Name</label>
-                                <div class="mt-2">
-                                    <input type="text" id="FreelanceName" name="New_Freelancer_Name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="Freelance Name" ">
-                            </div>
-                        </div>
-                        <div>
-                            <div class=" mt-2">
-                                    <label for="Competences" class="block text-sm font-medium leading-6">New Competences</label>
-                                    <input type="text" id="Competences" name="New_Competences" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="Competences" ">
-                            </div>
-                        </div>
-                        <div>
-                            <label for=" user" class="block text-sm font-medium leading-6">Linked User</label>
-                                    <select id=" users" name="New_username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                        <option selected>Choose the user</option>
-                                        <?php
-                                        // Populate the dropdown with usernames
-                                        foreach ($usernames as $username) {
-                                            echo "<option value=\"$username\">$username</option>";
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                                <div class="flex justify-center">
-                                    <button type="submit" class="flex w-1/2 justify-center rounded-md bg-primary-600 px-3 py-1.5 text-sm font-semibold leading-6 tracking-widest text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600">Submit Edits</button>
-                                </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
 
             <table class="w-full shadow-md text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -102,6 +59,53 @@
                 </tbody>
             </table>
         </div>
+        <!-- Modification Modal -->
+        <div id="modification-modal" class="modification_modal hidden overflow-y-auto overflow-x-hidden fixed w-1/2 rounded-xl border  top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 z-100 justify-center items-center dark:bg-gray-700 overflow-auto bg-opacity-50 ">
+            <div aria-hidden="true" class="flex flex-col justify-center px-2 py-12 lg:px-2 text-gray-900 dark:text-white">
+                <div class="sm:w-full sm:max-w-sm flex self-center justify-between items-center">
+                    <h2 class="self-center font-poppins text-center text-4xl font-bold leading-9 tracking-wider">Edit a Freelancer</h2>
+                    <span class="close cursor-pointer">&times;</span>
+                </div>
+
+                <div class="mt-10 self-center w-1/2">
+                    <form class="space-y-6" action="" method="POST">
+                        <input type="number" name="id" class="hidden" value="<?= $id ?>">
+                        <div>
+                            <label for="Freelance_name" class="block text-sm font-medium leading-6">New Freelancer Name</label>
+                            <div class="mt-2">
+                                <input type="text" id="FreelanceName" name="New_Freelancer_Name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="Freelance Name" ">
+                            </div>
+                        </div>
+                        <div>
+                            <div class=" mt-2">
+                                <label for="Competences" class="block text-sm font-medium leading-6">New Skills</label>
+                                <input type="text" id="Competences" name="New_Competences" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="Skills" ">
+                            </div>
+                        </div>
+                        <div>
+                            <label for=" user" class="block text-sm font-medium leading-6">Linked User</label>
+                                <select id=" users" name="New_username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option selected>Choose the user</option>
+                                    <?php
+                                    // Populate the dropdown with usernames
+                                    foreach ($usernames as $username) {
+                                        echo "<option value=\"$username\">$username</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="flex justify-center">
+                                <button type="submit" class="flex w-1/2 justify-center rounded-md bg-primary-600 px-3 py-1.5 text-sm font-semibold leading-6 tracking-widest text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600">Submit Edits</button>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <?php
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            edit_freelancer();
+        }
+        ?>
 
     </main>
     <script src="../assets/js/theme.js"></script>
@@ -111,6 +115,7 @@
             return confirmation;
         }
     </script>
+    <script src="../assets/js/freelancers.js"></script>
     <script src="../assets/js/navigation.js"></script>
 
 </body>
