@@ -49,16 +49,16 @@ function signup()
                     $resultuser = mysqli_stmt_execute($stmtuser);
 
                     if ($resultuser) {
-                        // If UserType is 'Freelancer', also insert into the freelancers table
+                        // Insering the User's Data into Freelance table is UserType = Freelancer
                         if ($usertype === 'Freelancer') {
                             $newUserId = mysqli_insert_id($conn);
                             $insertFreelancerQuery = "INSERT INTO freelances (FreelanceName, Competences, UserID) VALUES (?, ?, ?)";
                             $stmtFreelancer = mysqli_prepare($conn, $insertFreelancerQuery);
 
-                            // Customize the values based on your freelancers table structure
+                            //Collecting Values
                             $FreelanceName = $username;
                             $Skills = 'Add Skills';
-                            $UserID = $newUserId;  // You need to replace this with the actual skills value
+                            $UserID = $newUserId;  
 
                             mysqli_stmt_bind_param($stmtFreelancer, "sss", $FreelanceName, $Skills, $UserID);
 
@@ -114,6 +114,7 @@ function login()
             $_SESSION['UserName'] = $row['UserName'];
             $_SESSION['Email'] = $row['Email'];
             $_SESSION['profile_picture'] = $row['profile_picture'];
+            $_SESSION['UserType'] = $row['UserType'];
             if (isset($_POST['email'])) {
                 setcookie('email', $email, time() + 5 * 60, '/');
                 setcookie('password', $password, time() + 5 * 60, '/');
