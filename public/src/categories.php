@@ -17,88 +17,76 @@
 
 <body class="dark:bg-gray-900">
     <?php session_start() ?>
-    <?php if(isset($_SESSION['UserID'])):?>
-    <?php
-    include '../../includes/dashboard_navigation.php';
-    ?>
-    <main class=" mt-14 p-12 ml-0  smXl:ml-64  ">
+    <?php if (isset($_SESSION['UserID'])) : ?>
+        <?php
+        include '../../includes/dashboard_navigation.php';
+        include '../../app/controllers/Dashboard/categories_script.php';
+        ?>
+        <main class=" mt-14 p-12 ml-0  smXl:ml-64  ">
 
-        <div class="relative overflow-x-auto  sm:rounded-lg">
+            <div class="relative overflow-x-auto  sm:rounded-lg">
 
 
-            <a href="addcategory.php"><button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="block mb-7 font-inter text-white bg-primary-600 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-parimary-600 dark:hover:bg-primary-800 dark:focus:ring-primary-800" type="button">
-                    + Add Category
-                </button></a>
-            <table class="w-full shadow-md text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">
-                            Category Name
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Count of Sous Categories
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Edit
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Delete
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $sql = "SELECT categories.*, count(souscategories.SousCategoryID) 
-                            FROM categories
-                            LEFT JOIN souscategories ON categories.CategoryID = souscategories.CategoryID
-                            GROUP BY categories.CategoryID";
-                    $result = mysqli_query($conn, $sql);
+                <a href="addcategory.php"><button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="block mb-7 font-inter text-white bg-primary-600 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-parimary-600 dark:hover:bg-primary-800 dark:focus:ring-primary-800" type="button">
+                        + Add Category
+                    </button></a>
+                <table class="w-full shadow-md text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                Category Name
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Count of Sous Categories
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Edit
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Delete
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?= display_categories() ?>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Modification Modal -->
+            <div id="modification-modal" class="modification_modal hidden overflow-y-auto overflow-x-hidden fixed w-1/2 rounded-xl border  top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 z-100 justify-center items-center dark:bg-gray-700 overflow-auto bg-opacity-50 ">
+                <div aria-hidden="true" class="flex flex-col justify-center px-2 py-12 lg:px-2 text-gray-900 dark:text-white">
+                    <div class="sm:w-full sm:max-w-sm flex self-center justify-between items-center">
+                        <h2 class="self-center font-poppins text-center text-4xl font-bold leading-9 tracking-wider">Edit a Category</h2>
+                        <span class="close cursor-pointer">&times;</span>
+                    </div>
 
-                    // Check if the query was successful
-                    if ($result === false) {
-                        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-                    } else {
-                        // Check if there are rows in the result set
-                        if (mysqli_num_rows($result) > 0) {
-                            // Output data of each row
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                $id = $row['CategoryID'];
-                                $CategoryName = $row['CategoryName'];
-                                $SousCategories = $row['count(souscategories.SousCategoryID)'];
-                    ?>
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <td scope="row" class="px-6 py-4 text-gray-900 dark:text-white">
-                                        <?= $CategoryName ?>
-                                    </td>
-                                    <td class="px-6 py-4 dark:text-white">
-                                        <?= $SousCategories ?>
-                                    </td>
-                                    <td class="flex px-6 py-4 dark:text-white">
-                                        <form action="./editCategory.php" method="POST" class="w-full">
-                                            <input type="number" name="id" class="hidden" id="id" value="<?= $id ?>">
-                                            <button class="editfreelancer w-full self-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm py-2 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Edit Category</button>
-                                        </form>
-                                    </td>
-                                    <td class=" px-4 py-4 dark:text-white">
-                                        <a href="deleteCategory.php?id=<?= $id ?>" onclick="return confirmDelete()" class="w-full">
-                                            <button href="#" id="removeCat" class="w-full text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm py-2 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Remove Category</button>
-                                        </a>
-                                    </td>
-                                </tr>
-                    <?php
-                            }
-                        } else {
-                            echo '<tr><td colspan="4">No results found.</td></tr>';
-                        }
-                    }
-                    ?>
-                </tbody>
-            </table>
-        </div>
+                    <div class="mt-10 self-center w-1/2">
+                        <form class="space-y-6" action="" method="POST">
+                            <input type="number" name="id" id="CategoryID" class="hidden" value="<?= $id ?>">
+                            <div>
+                                <label for="Category_name" class="block text-sm font-medium leading-6">New Category Name</label>
+                                <div class="mt-2">
+                                    <input type="text" id="CategoryName" name="New_Category_Name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="Category Name" ">
+                            </div>
+                        </div>
+                        <div>
+                            <div class=" mt-2">
+                                    <label for="Cover" class="block text-sm font-medium leading-6">New Cover</label>
+                                    <input type="text" id="Cover" name="New_Cover" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="Skills" ">
+                            </div>
+                        </div>
+                        <div class=" flex justify-center">
+                            <button type="submit" class="flex w-1/2 justify-center rounded-md bg-primary-600 px-3 py-1.5 text-sm font-semibold leading-6 tracking-widest text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600">Submit Edits</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
-    </main>
+
+        </main>
     <?php else : ?>
-        <div class="grid h-screen px-4 place-content-center">
+        <div class=" grid h-screen px-4 place-content-center">
             <div class="text-center">
                 <h1 class="font-black text-gray-200 text-9xl">:)</h1>
 
@@ -119,6 +107,7 @@
 <script src="../assets/js/theme.js"></script>
 <script src="../assets/js/dashboard.js"></script>
 <script src="../assets/js/navigation.js"></script>
+<script src="../assets/js/categories.js"></script>
 
 <script>
     function confirmDelete() {

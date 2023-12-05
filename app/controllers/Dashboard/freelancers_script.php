@@ -24,7 +24,7 @@ function display_freelancer()
                 $FreelanceName = $row['FreelanceName'];
                 $Competences = $row['Competences'];
                 $email = $row['email'];
-?>
+    ?>
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <td scope="row" class="px-6 py-4 text-gray-900 dark:text-white">
                         <?= $FreelanceName ?>
@@ -46,7 +46,7 @@ function display_freelancer()
 
 
                 </tr>
-<?php
+    <?php
             }
         } else {
             echo '<tr><td colspan="4">No results found.</td></tr>';

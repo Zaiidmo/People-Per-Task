@@ -79,42 +79,30 @@
     <div class=" flex flex-col items-center py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
       <h2 class="mb-12 text-2xl tracking-tight font-normal text-[#00373E] dark:text-white lg:text-5xl">Most Popular <span class="text-primary-600">categories</span></h2>
       <div class="grid gap-6 lg:gap-10 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 items-center">
+      <?php
+        $sql = "SELECT * FROM categories ORDER BY CategoryID ASC LIMIT 4";
+        $result = mysqli_query($conn, $sql);
+
+        // Check if there are any results
+        if (mysqli_num_rows($result) > 0) {
+
+          // Loop through the results and generate cards
+          while ($row = mysqli_fetch_assoc($result)) {
+            $C_Name = $row['CategoryName'];
+        ?>
         <div class="shadow-md">
           <a href="./marketplace.php" class="block w-full h-50 relative rounded-2xl overflow-hidden">
             <img class="w-full h-full" src="../assets/images/category1.png" alt="Graphic Design">
             <div class="absolute inset-0 bg-black bg-opacity-50"></div>
             <div class="absolute inset-0 flex items-center justify-center">
-              <span class="text-white text-xl font-bold tracking-wider">Graphic Design</span>
+              <span class="text-white text-xl font-bold tracking-wider"><?= $C_Name ?></span>
             </div>
           </a>
         </div>
-        <div class="shadow-md hidden sm:block">
-          <a href="./marketplace.php" class="block w-full h-50 relative rounded-2xl overflow-hidden">
-            <img class="w-full h-full" src="../assets/images/category2.png" alt="Cartoon Animation">
-            <div class="absolute inset-0 bg-black bg-opacity-50"></div>
-            <div class="absolute inset-0 flex items-center justify-center">
-              <span class="text-white text-xl font-bold tracking-wider">Cartoon Animation</span>
-            </div>
-          </a>
-        </div>
-        <div class="shadow-md hidden sm:block">
-          <a href="./marketplace.php" class="block w-full h-50 relative rounded-2xl overflow-hidden">
-            <img class="w-full h-full" src="../assets/images/category3.png" alt="Illustration">
-            <div class="absolute inset-0 bg-black bg-opacity-50"></div>
-            <div class="absolute inset-0 flex items-center justify-center">
-              <span class="text-white text-xl font-bold tracking-wider">Illustration</span>
-            </div>
-          </a>
-        </div>
-        <div class="shadow-md">
-          <a href="./marketplace.php" class="block w-full h-50 relative rounded-2xl overflow-hidden">
-            <img class="w-full h-full " src="../assets/images/category4.png" alt="Video Editing">
-            <div class="absolute inset-0 bg-black bg-opacity-50"></div>
-            <div class="absolute inset-0 flex items-center justify-center">
-              <span class="text-white text-xl tracking-wider font-bold">Video Editing</span>
-            </div>
-          </a>
-        </div>
+        <?php
+          }
+        }
+        ?>
       </div>
       <button id="More" type="button" class="bg-primary-600 text-white hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-3xl text-xl px-5 py-3 text-center ml-1 md:ml-1 mt-10 dark:focus:ring-orange-600">More categories
       </button>
