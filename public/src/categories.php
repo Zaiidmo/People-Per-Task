@@ -61,18 +61,18 @@
                     </div>
 
                     <div class="mt-10 self-center w-1/2">
-                        <form class="space-y-6" action="" method="POST">
+                        <form class="space-y-6" action="" method="POST" enctype="multipart/form-data">
                             <input type="number" name="id" id="CategoryID" class="hidden" value="<?= $id ?>">
                             <div>
-                                <label for="Category_name" class="block text-sm font-medium leading-6">New Category Name</label>
+                                <label for="Category_name" class="peer-focus:font-medium text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">New Category Name</label>
                                 <div class="mt-2">
                                     <input type="text" id="CategoryName" name="New_Category_Name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="Category Name" ">
                             </div>
                         </div>
                         <div>
-                            <div class=" mt-2">
-                                    <label for="Cover" class="block text-sm font-medium leading-6">New Cover</label>
-                                    <input type="text" id="Cover" name="New_Cover" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="Skills" ">
+                            <div class=" relative z-0 w-full mb-5 group">
+                                <label for="Cover" class="peer-focus:font-medium text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">New Category Cover</label>
+                                <input type="file" name="New_Cover" id="New_Cover" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" placeholder=" " />
                             </div>
                         </div>
                         <div class=" flex justify-center">
@@ -82,7 +82,11 @@
                     </div>
                 </div>
             </div>
-
+            <?php
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                edit_category();
+            }
+            ?>
 
         </main>
     <?php else : ?>

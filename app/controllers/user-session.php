@@ -26,7 +26,7 @@ function signup()
             $usertype = $_POST["UserType"];
 
             // Check if the uploaded file is an image
-            $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+            $allowedExtensions = ['jpg', 'jpeg', 'png'];
             $fileExtension = strtolower(pathinfo($_FILES['profile_picture']['name'], PATHINFO_EXTENSION));
 
             if (in_array($fileExtension, $allowedExtensions)) {

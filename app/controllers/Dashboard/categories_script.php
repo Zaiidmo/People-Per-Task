@@ -1,4 +1,7 @@
 <?php
+
+use LDAP\Result;
+
 require 'D:\GITREPOS\PeoplePerTask-full\config\Connect.php';
 global $id;
 
@@ -47,6 +50,68 @@ function display_categories()
             }
         } else {
             echo '<tr><td colspan="4">No results found.</td></tr>';
+        }
+    }
+}
+
+//Function to Edit a Category 
+function edit_category()
+{
+    global $conn;
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Retrieve form data
+        $CategoryID = $_POST['id'];
+        $NewCategoryName = $_POST['New_Category_Name'];
+
+        // Check if the uploaded file is an image
+        $allowedExtensions = ['jpg', 'jpeg', 'png'];
+        $fileExtension = strtolower(pathinfo($_FILES['New_Cover']['name'], PATHINFO_EXTENSION));
+
+        if (in_array($fileExtension, $allowedExtensions)) {
+
+            // Set the target directory for uploads
+            $uploadDirectory = "../../public/assets/uploads/";
+
+            // Generate a unique filename for the uploaded image
+            $targetFileName = $uploadDirectory . $NewCategoryName . "." . $fileExtension;
+            
+            // Move the uploaded file to the target directory
+            if (move_uploaded_file($_FILES['New_Cover']['tmp_name'], $targetFileName)) {
+
+                // Escape values to prevent SQL injection
+                $CategoryID = mysqli_real_escape_string($conn, $CategoryID);
+                $NewCategoryName = mysqli_real_escape_string($conn, $NewCategoryName);
+                $targetFileName = mysqli_real_escape_string($conn, $targetFileName);
+
+                $query = "UPDATE categories 
+                          SET 
+                              CategoryName = ?,
+                              Cover = ?
+                          WHERE 
+                              CategoryID = ?";
+
+                $stmt = mysqli_prepare($conn, $query);
+
+                // Bind parameters
+                mysqli_stmt_bind_param($stmt, "ssi", $NewCategoryName, $targetFileName, $CategoryID);
+
+                // Execute the statement
+                $result = mysqli_stmt_execute($stmt);
+
+                if ($result) {
+                    echo "Edited Successfully";
+                    // Redirect back to the form page
+                    echo "<script> window.location.href = '../../../public/src/categories.php'</script>";
+                    exit;
+                } else {
+                    echo "Error: " . mysqli_error($conn);
+                }
+            } else {
+                echo "Error moving the uploaded file.";
+            }
+        } else {
+            echo 'Invalid file format. Allowed formats: ' . implode(', ', $allowedExtensions);
         }
     }
 }
