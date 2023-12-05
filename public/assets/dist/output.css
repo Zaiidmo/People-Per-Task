@@ -831,6 +831,10 @@ select {
   top: 2.75rem;
 }
 
+.z-0 {
+  z-index: 0;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -1019,6 +1023,10 @@ select {
 
 .mr-auto {
   margin-right: auto;
+}
+
+.ms-2 {
+  margin-inline-start: 0.5rem;
 }
 
 .mt-1 {
@@ -1970,6 +1978,10 @@ select {
 
 .pr-4 {
   padding-right: 1rem;
+}
+
+.ps-4 {
+  padding-inline-start: 1rem;
 }
 
 .pt-1 {

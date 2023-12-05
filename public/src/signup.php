@@ -61,7 +61,19 @@
           <input type="file" name="profile_picture" id="profile_picture" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" placeholder=" " />
         </div>
 
-        <button type="submit" id="submit" name="signup" class="self-center w-1/2 text-white bg-primary-600 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-bold rounded-2xl text-sm  sm:w-auto px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 tracking-widest max-w-md ">S T A R T</button>
+        <div class="flex justify-evenly w-full items-left">
+          <div class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-600 px-4">
+            <input id="Client" type="radio" value="Client" name="UserType" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+            <label for="Client" class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">I'm a Client</label>
+          </div>
+          <div class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-600 px-4">
+            <input checked id="Freelancer" type="radio" value="Freelancer" name="UserType" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+            <label for="Freelancer" class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">I'm a freelancer</label>
+          </div>
+        </div>
+
+
+        <button type="submit" id="submit" name="signup" class="self-center w-1/2 text-white bg-primary-600 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-bold rounded-2xl text-sm  sm:w-auto px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 tracking-widest max-w-md mt-3">S T A R T</button>
       </form>
 
 
