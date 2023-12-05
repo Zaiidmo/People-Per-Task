@@ -118,12 +118,13 @@ function login()
                 setcookie('email', $email, time() + 5 * 60, '/');
                 setcookie('password', $password, time() + 5 * 60, '/');
                 header('Location: ../../public/src/index.php');
-            }
+            } 
         } else {
             echo 'Invalid Password';
         }
     } else {
-        echo 'Invalid Email';
+        $error = 'Email Not Found';
+        echo $error ;
     }
 }
 
