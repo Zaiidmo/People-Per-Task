@@ -17,7 +17,7 @@
 
 <body class="dark:bg-gray-900">
     <?php session_start() ?>
-    <?php if (isset($_SESSION['UserID'])) : ?>
+    <?php if (isset($_SESSION['UserID']) && $_SESSION['UserType'] === 'Admin' ) : ?>
         <?php
         include '../../includes/dashboard_navigation.php';
         include '../../app/controllers/Dashboard/categories_script.php';
