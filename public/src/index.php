@@ -69,6 +69,9 @@
             </div>
         <?php
           }
+        } else {
+          echo '<h2 w-full class="mb-12 text-2xl tracking-tight text-center font-normal text-[#00373E] dark:text-white lg:text-5xl">There is no <span class="text-primary-600">works </span>Posted yet</h2>
+          ';
         }
         ?>
       </div>
@@ -79,8 +82,13 @@
     <div class=" flex flex-col items-center py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
       <h2 class="mb-12 text-2xl tracking-tight font-normal text-[#00373E] dark:text-white lg:text-5xl">Most Popular <span class="text-primary-600">categories</span></h2>
       <div class="grid gap-6 lg:gap-10 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 items-center">
-      <?php
-        $sql = "SELECT * FROM categories ORDER BY CategoryID ASC LIMIT 4";
+        <?php
+        $sql = "SELECT categories.*, COUNT(souscategories.SousCategoryID) AS SubcategoryCount
+        FROM categories
+        LEFT JOIN souscategories ON categories.CategoryID = souscategories.CategoryID
+        GROUP BY categories.CategoryID
+        ORDER BY SubcategoryCount DESC
+        LIMIT 4";
         $result = mysqli_query($conn, $sql);
 
         // Check if there are any results
@@ -89,16 +97,17 @@
           // Loop through the results and generate cards
           while ($row = mysqli_fetch_assoc($result)) {
             $C_Name = $row['CategoryName'];
+            $C_Cover = $row['Cover'];
         ?>
-        <div class="shadow-md">
-          <a href="./marketplace.php" class="block w-full h-50 relative rounded-2xl overflow-hidden">
-            <img class="w-full h-full" src="../assets/images/category1.png" alt="Graphic Design">
-            <div class="absolute inset-0 bg-black bg-opacity-50"></div>
-            <div class="absolute inset-0 flex items-center justify-center">
-              <span class="text-white text-xl font-bold tracking-wider"><?= $C_Name ?></span>
+            <div class="shadow-md">
+              <a href="./marketplace.php" class="block w-full h-50 relative rounded-2xl overflow-hidden">
+                <img class="w-full h-full" src="<?= $C_Cover ?>" alt="Graphic Design">
+                <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <span class="text-white text-xl font-bold tracking-wider"><?= $C_Name ?></span>
+                </div>
+              </a>
             </div>
-          </a>
-        </div>
         <?php
           }
         }

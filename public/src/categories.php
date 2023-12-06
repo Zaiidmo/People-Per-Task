@@ -66,7 +66,7 @@
                             <div>
                                 <label for="Category_name" class="peer-focus:font-medium text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">New Category Name</label>
                                 <div class="mt-2">
-                                    <input type="text" id="CategoryName" name="New_Category_Name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="Category Name" ">
+                                    <input type="text" id="CategoryName" name="New_Category_Name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="Category Name">
                             </div>
                         </div>
                         <div>
@@ -109,7 +109,7 @@
 
 </body>
 <script src="../assets/js/theme.js"></script>
-<script src="../assets/js/dashboard.js"></script>
+<!-- <script src="../assets/js/dashboard.js"></script> -->
 <script src="../assets/js/navigation.js"></script>
 <script src="../assets/js/categories.js"></script>
 

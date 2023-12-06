@@ -8,21 +8,22 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add a click event listener to each 'editCategory' button
     editButtons.forEach(function (button) {
         button.addEventListener('click', function () {
-            // Display the modal
-            modal.classList.remove('hidden');
+            // Log the Category ID to the console
+            var CategoryId = button.getAttribute('data-Cat_id');
+            console.log('Category ID:', CategoryId);
 
-            // Get the Category ID from the clicked button
-            var CategoryId = button.dataset.CategoryId;
-
-            // Assuming you have an input field in your form with the ID 'modalCategoryId'
+            // Assuming you have an input field in your form with the ID 'CategoryID'
             var modalCategoryIdInput = document.getElementById('CategoryID');
-            
+
+      
+
             // Set the Category ID in the modal form
             if (modalCategoryIdInput) {
                 modalCategoryIdInput.value = CategoryId;
             }
 
-            console.log('Category ID:', CategoryId);
+            // Display the modal
+            modal.classList.remove('hidden');
         });
     });
 

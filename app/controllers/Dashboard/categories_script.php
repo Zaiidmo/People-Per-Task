@@ -24,7 +24,7 @@ function display_categories()
         if (mysqli_num_rows($result) > 0) {
             // Output data of each row
             while ($row = mysqli_fetch_assoc($result)) {
-                $CategoryID = $row['CategoryID'];
+                $id = $row['CategoryID'];
                 $CategoryName = $row['CategoryName'];
                 $SousCategories = $row['count(souscategories.SousCategoryID)'];
                 $Cover = $row['Cover'];
@@ -38,10 +38,10 @@ function display_categories()
                     </td>
                     <td class="flex px-6 py-4 dark:text-white">
                         <input type="number" name="id" class="hidden" id="id" value="<?= $id ?>">
-                        <button data-category-id="<?= $id ?>" class="editCategory w-full self-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm py-2 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Edit Category</button>
+                        <button data-Cat_id="<?= $id ?>" class="editCategory w-full self-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm py-2 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Edit Category</button>
                     </td>
                     <td class=" px-4 py-4 dark:text-white">
-                        <a href="../../app/controllers/Dashboard/remove.php?CategoryID=<?= $CategoryID ?>" onclick="return confirmDelete()" class="w-full">
+                        <a href="../../app/controllers/Dashboard/remove.php?CategoryID=<?= $id ?>" onclick="return confirmDelete()" class="w-full">
                             <button id="removeCategory" class="w-full text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm py-2 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Remove Category</button>
                         </a>
                     </td>
@@ -58,6 +58,7 @@ function display_categories()
 function edit_category()
 {
     global $conn;
+    global $id;
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Retrieve form data
