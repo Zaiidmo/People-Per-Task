@@ -12,15 +12,19 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../dist/output.css" />
-    <title>Admin - EditFreelancer</title>
+    <title>Settings</title>
 </head>
 
 <body>
     <?php
-    require '../../config/Connect.php';
     require '../../app/controllers/user-session.php';
+    require '../../includes/dashboard_navigation.php';
 
     $id = $_SESSION['UserID'] ;
     $UserName = $_SESSION['UserName'] ; 
     $email = $_SESSION['Email'] ; 
     ?>
+</body>
+<script src="../assets/js/theme.js"></script>
+<script src="../assets/js/navigation.js"></script>
+</html>

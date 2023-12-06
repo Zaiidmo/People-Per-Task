@@ -19,7 +19,6 @@
             </div>
             <div class="flex items-center">
                 <div class="flex relative items-center ml-3">
-
                     <?php if (isset($_SESSION['UserID'])) : ?>
                         <div>
                             <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" aria-expanded="false" id="dropdown-user-button" data-dropdown-toggle="dropdown-user">
@@ -87,6 +86,17 @@
                 </a>
             </li>
 
+            <li>
+                <a href="../src/settings.php" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+
+                    <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" width="20" height="20"  fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9.99984 0.844971L19.6598 6.42297V17.577L9.99984 23.155L0.339844 17.577V6.42297L9.99984 0.844971ZM9.99984 3.15497L2.33984 7.57697V16.423L9.99984 20.845L17.6598 16.423V7.57697L9.99984 3.15497ZM9.99984 8.99997C9.20419 8.99997 8.44113 9.31604 7.87852 9.87865C7.31591 10.4413 6.99984 11.2043 6.99984 12C6.99984 12.7956 7.31591 13.5587 7.87852 14.1213C8.44113 14.6839 9.20419 15 9.99984 15C10.7955 15 11.5586 14.6839 12.1212 14.1213C12.6838 13.5587 12.9998 12.7956 12.9998 12C12.9998 11.2043 12.6838 10.4413 12.1212 9.87865C11.5586 9.31604 10.7955 8.99997 9.99984 8.99997ZM4.99984 12C4.99984 10.6739 5.52663 9.40212 6.46431 8.46444C7.40199 7.52675 8.67376 6.99997 9.99984 6.99997C11.3259 6.99997 12.5977 7.52675 13.5354 8.46444C14.4731 9.40212 14.9998 10.6739 14.9998 12C14.9998 13.3261 14.4731 14.5978 13.5354 15.5355C12.5977 16.4732 11.3259 17 9.99984 17C8.67376 17 7.40199 16.4732 6.46431 15.5355C5.52663 14.5978 4.99984 13.3261 4.99984 12Z" fill="currentColor" />
+                    </svg>
+
+
+                    <span class="flex-1 ml-3 whitespace-nowrap font-inter">Edit Profile</span>
+                </a>
+            </li>
             <li>
                 <a href="../src/freelancers.php" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
