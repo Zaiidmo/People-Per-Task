@@ -35,3 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+
+//Toggle Sub Categories 
+
