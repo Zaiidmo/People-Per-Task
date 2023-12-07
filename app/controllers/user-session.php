@@ -113,6 +113,7 @@ function login()
             $_SESSION['UserID'] = $row['UserID'];
             $_SESSION['UserName'] = $row['UserName'];
             $_SESSION['Email'] = $row['Email'];
+            $_SESSION['Phone'] = $row['PhoneNumber'];
             $_SESSION['profile_picture'] = $row['profile_picture'];
             $_SESSION['UserType'] = $row['UserType'];
             if (isset($_POST['email'])) {
