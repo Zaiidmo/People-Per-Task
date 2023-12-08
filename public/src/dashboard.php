@@ -21,7 +21,7 @@
     <?php if (isset($_SESSION['UserID'])) : ?>
         <?php
         $usertype = $_SESSION['UserType'];
-        if ($usertype === 'Admin' || $usertype === 'Freelancer') :
+        if ($usertype === 'Admin') :
             include '../../includes/dashboard_navigation.php';
             require '../../app/controllers/Dashboard/dashboard_script.php';
         ?>

@@ -28,7 +28,7 @@ function display_categories()
                 $CategoryName = $row['CategoryName'];
                 $SubCategoryCount = $row['SubCategoryCount'];
                 $Cover = $row['Cover'];
-?>
+    ?>
 
                 <!-- Main Category Row -->
                 <tr class="category-row bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" data-catid="<?= $id ?>">
@@ -73,7 +73,7 @@ function display_categories()
                     </td>
                 </tr>
 
-<?php
+    <?php
             }
         } else {
             echo '<tr><td colspan="4">No results found.</td></tr>';
