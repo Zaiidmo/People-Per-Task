@@ -78,16 +78,16 @@
                                         <div class="px-4 py-2 text-gray-700 dark:text-gray-400"><?= $_SESSION['UserName'] ?></div>
                                     </div>
                                     <div class="grid grid-cols-2">
-                                        <div class="px-4 py-2 font-semibold  text-gray-700 dark:text-gray-300">Current Address</div>
-                                        <div class="px-4 py-2 text-gray-700 dark:text-gray-400">Beech Creek, PA, Pennsylvania</div>
+                                        <div class="px-4 py-2 font-semibold  text-gray-700 dark:text-gray-300">Work's Phone Number</div>
+                                        <div class="px-4 py-2 text-gray-700 dark:text-gray-400"><?= '+' . $_SESSION['Phone'] ?></div>
                                     </div>
                                     <div class="grid grid-cols-2">
                                         <div class="px-4 py-2 font-semibold  text-gray-700 dark:text-gray-300">Email.</div>
                                         <div class="px-4 py-2 text-gray-700 dark:text-gray-400"><?= $_SESSION['Email'] ?></div>
                                     </div>
                                     <div class="grid grid-cols-2">
-                                        <div class="px-4 py-2 font-semibold  text-gray-700 dark:text-gray-300">Birthday</div>
-                                        <div class="px-4 py-2 text-gray-700 dark:text-gray-400">Feb 06, 1998</div>
+                                        <div class="px-4 py-2 font-semibold  text-gray-700 dark:text-gray-300">Actual Position</div>
+                                        <div class="px-4 py-2 text-gray-700 dark:text-gray-400"><?= $_SESSION['UserType'] ?></div>
                                     </div>
                                 </div>
                             </div>
