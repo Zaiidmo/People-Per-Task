@@ -48,7 +48,7 @@
       <h2 class="mb-12 text-2xl tracking-tight font-normal text-[#00373E] dark:text-white lg:text-5xl">Recently posted <span class="text-primary-600">works</span></h2>
       <div class="grid gap-6 lg:gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 items-center">
         <?php
-        $sql = "SELECT * FROM projects ORDER BY ProjectID DESC LIMIT 3";
+        $sql = "SELECT* FROM projects ORDER BY ProjectID DESC LIMIT 3";
         $result = mysqli_query($conn, $sql);
 
         // Check if there are any results
