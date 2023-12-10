@@ -175,7 +175,7 @@ session_start();
                                             </svg>
                                             <h3 class=" text-xl font-bold dark:text-white ml-2"><?= $P_title ?></h3>
                                         </div>
-                                        <p class="text-gray-500 dark:text-gray-400"><?= $P_desc ?></p>
+                                        <div style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;" class="text-gray-500 dark:text-gray-400"><?= $P_desc ?></div>
                                         <button type="button" class="text-orange-600 hover:text-black dark:hover:text-white focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-3xl text-xl px-3 py-2 text-center ml-1 md:ml-1 mt-5 dark:focus:ring-orange-600 ">EDIT 
                                         </button>
                                     </div>

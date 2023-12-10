@@ -32,7 +32,7 @@ function display_projects()
                 $UserName = $row['username'];
                 $CategoryName = $row['CategoryName'];
                 $SousCategoryName = $row['SousCategoryName'];
-?>
+    ?>
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <td scope="row" class="px-6 py-4 text-gray-900 dark:text-white">
                         <?= $projectTitle ?>
@@ -71,18 +71,18 @@ function display_projects()
                     <!-- Display an alternative content -->
                     Not authorized to edit or remove categories.
                 </td>
-<?php
+    <?php
                     }
                 }
             } else {
                 echo '<tr><td colspan="4">No results found.</td></tr>';
             }
         }
-    }
+}
 
 
-    //Create a new project 
-    function create_project()
+//Create a new project 
+function create_project()
 {
     global $conn;
 
@@ -92,6 +92,7 @@ function display_projects()
         $Description = $_POST["Description"];
         $category = $_POST["category"];
         $souscategory = $_POST["souscategories"];
+        $tags = $_POST["tags"];
 
         // Retrieve CategoryID and SousCategoryID
         $findIDQuery = "SELECT categories.CategoryID, souscategories.SousCategoryID 
@@ -132,7 +133,7 @@ function display_projects()
         if (empty($Title) || empty($Description) || empty($category) || empty($souscategory)) {
             echo "<script> alert('All fields are required.')</script>";
         } else {
-            // Insert data into the database
+            // Insert data into the projects table
             $query = "INSERT INTO projects (ProjectTitle, Description, UserID, CategoryID, SousCategoryID) VALUES (?, ?, ?, ?, ?)";
 
             // Use prepared statement to prevent SQL injection
@@ -145,7 +146,43 @@ function display_projects()
             $add_result = mysqli_stmt_execute($stmt);
 
             if ($add_result) {
-                echo "<script> alert('Project Added Successfully.')</script>"; 
+                // Get the ID of the inserted project
+                $projectID = mysqli_insert_id($conn);
+
+                // Handle tags
+                $tagArray = explode(",", $tags);
+                foreach ($tagArray as $tag) {
+                    $tag = trim($tag);
+
+                    // Check if the tag already exists
+                    $tagExistsQuery = "SELECT Tag_id FROM tags WHERE Tag_name = ?";
+                    $stmtTagExists = mysqli_prepare($conn, $tagExistsQuery);
+                    mysqli_stmt_bind_param($stmtTagExists, "s", $tag);
+                    mysqli_stmt_execute($stmtTagExists);
+                    $tagResult = mysqli_stmt_get_result($stmtTagExists);
+
+                    if ($tagResult && $tagRow = mysqli_fetch_assoc($tagResult)) {
+                        // Tag already exists, get its ID
+                        $tagID = $tagRow['id'];
+                    } else {
+                        // Tag does not exist, add it to the tags table
+                        $addTagQuery = "INSERT INTO tags (tag_name) VALUES (?)";
+                        $stmtAddTag = mysqli_prepare($conn, $addTagQuery);
+                        mysqli_stmt_bind_param($stmtAddTag, "s", $tag);
+                        mysqli_stmt_execute($stmtAddTag);
+
+                        // Get the ID of the newly added tag
+                        $tagID = mysqli_insert_id($conn);
+                    }
+
+                    // Add project-tag relationship
+                    $addProjectTagQuery = "INSERT INTO Projects_tags (projectID, tagID) VALUES (?, ?)";
+                    $stmtAddProjectTag = mysqli_prepare($conn, $addProjectTagQuery);
+                    mysqli_stmt_bind_param($stmtAddProjectTag, "ii", $projectID, $tagID);
+                    mysqli_stmt_execute($stmtAddProjectTag);
+                }
+
+                echo "<script> alert('Project Added Successfully.')</script>";
                 echo "<script>window.location.href = 'marketplace.php'</script>";
             } else {
                 echo "Error Inserting Data: " . mysqli_error($conn);
@@ -159,4 +196,7 @@ function display_projects()
         mysqli_stmt_close($stmtFindID);
     }
 }
+
+
+
 
