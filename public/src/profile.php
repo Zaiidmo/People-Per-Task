@@ -110,7 +110,8 @@ session_start();
                                 <?php if ($_SESSION['UserType'] === 'Admin') : ?>
                                     <h3 class="text-left mr-96 text-gray-700 tracking-widest dark:text-white font-mono font-bold ">POSTED PROJECTS</h3>
                             </div>
-                            <?php
+                            <div class="grid grid-cols-3 gap-5">
+                                <?php
                                     $conn = mysqli_connect("localhost", "root", "", "peoplepertask");
 
                                     if (!$conn) {
@@ -126,9 +127,8 @@ session_start();
                                             $P_desc = $row['Description'];
                                             $res = $row['UserName'];
 
-                            ?>
+                                ?>
 
-                                    <div class="grid grid-cols-3 gap-10">
                                         <div class="w-64 mt-6 bg-white p-8 border border-gray-300 dark:border-gray-700  rounded-lg dark:bg-gray-800 shadow-md">
                                             <div class="flex justify-between items-center content-center mb-4 w-fit h-fit rounded-full lg:h-fit lg:w-fit  ">
                                                 <svg width="40" height="42" viewBox="0 0 37 39" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[#00373E] dark:text-white">
@@ -140,17 +140,20 @@ session_start();
                                             <button type="button" class="text-orange-600 hover:text-black dark:hover:text-white focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-3xl text-sm px-3 py-2 text-left ml-1 md:ml-1 mt-5 dark:focus:ring-orange-600 ">Posted By <?= $res ?>
                                             </button>
                                         </div>
-                                    </div>
-                            <?php
+                                <?php
                                         }
                                     } else {
                                         echo '<h3 class="text-left mr-96 text-gray-700 tracking-widest dark:text-white font-mono font-bold ">YOU HAVE NOT POSTED ANY PROJECT YET</h3>';
                                     }
-                            ?>
+                                ?>
+                            </div>
+
                         <?php elseif ($_SESSION['UserType'] === 'Client') : ?>
                             <h3 class="text-left mr-96 text-gray-700 tracking-widest dark:text-white font-mono font-bold ">MY POSTED PROJECTS</h3>
                         </div>
-                        <?php
+                        <div class="grid grid-cols-3 gap-10">
+
+                            <?php
                                     $conn = mysqli_connect("localhost", "root", "", "peoplepertask");
 
                                     if (!$conn) {
@@ -163,9 +166,8 @@ session_start();
                                             $P_title = $row['ProjectTitle'];
                                             $P_desc = $row['Description'];
 
-                        ?>
+                            ?>
 
-                                <div class="grid grid-cols-3 gap-10">
                                     <div class="w-64 mt-6 bg-white p-8 border border-gray-300 dark:border-gray-700  rounded-lg dark:bg-gray-800 shadow-md">
                                         <div class="flex justify-between items-center content-center mb-4 w-fit h-fit rounded-full lg:h-fit lg:w-fit  ">
                                             <svg width="40" height="42" viewBox="0 0 37 39" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[#00373E] dark:text-white">
@@ -174,20 +176,23 @@ session_start();
                                             <h3 class=" text-xl font-bold dark:text-white ml-2"><?= $P_title ?></h3>
                                         </div>
                                         <p class="text-gray-500 dark:text-gray-400"><?= $P_desc ?></p>
-                                        <button type="button" class="text-orange-600 hover:text-black dark:hover:text-white focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-3xl text-xl px-3 py-2 text-center ml-1 md:ml-1 mt-5 dark:focus:ring-orange-600 ">APPLY NOW
+                                        <button type="button" class="text-orange-600 hover:text-black dark:hover:text-white focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-3xl text-xl px-3 py-2 text-center ml-1 md:ml-1 mt-5 dark:focus:ring-orange-600 ">EDIT 
                                         </button>
                                     </div>
-                                </div>
-                        <?php
+                            <?php
                                         }
                                     } else {
                                         echo '<h3 class="text-left mr-96 text-gray-700 tracking-widest dark:text-white font-mono font-bold ">YOU HAVE NOT POSTED ANY PROJECT YET</h3>';
                                     }
-                        ?>
+                            ?>
+                        </div>
+
                     <?php else : ?>
                         <h3 class="text-left mr-96 text-gray-700 tracking-widest dark:text-white font-mono font-bold ">MY PROPOSALS</h3>
                     </div>
-                    <?php
+                    <div class="grid grid-cols-3 gap-10">
+
+                        <?php
                                     $conn = mysqli_connect("localhost", "root", "", "peoplepertask");
                                     $sql = 'SELECT* FROM projects WHERE UserID =' . $_SESSION["UserID"];
                                     $result = mysqli_query($conn, $sql);
@@ -196,9 +201,8 @@ session_start();
                                             $P_title = $row['ProjectTitle'];
                                             $P_desc = $row['Description'];
 
-                    ?>
+                        ?>
 
-                            <div class="grid grid-cols-3 gap-10">
                                 <div class="w-64 mt-6 bg-white p-8 border border-gray-300 dark:border-gray-700  rounded-lg dark:bg-gray-800 shadow-md">
                                     <div class="flex justify-between items-center content-center mb-4 w-fit h-fit rounded-full lg:h-fit lg:w-fit  ">
                                         <svg width="40" height="42" viewBox="0 0 37 39" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[#00373E] dark:text-white">
@@ -210,17 +214,18 @@ session_start();
                                     <button type="button" class="text-orange-600 hover:text-black dark:hover:text-white focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-3xl text-xl px-3 py-2 text-center ml-1 md:ml-1 mt-5 dark:focus:ring-orange-600 ">APPLY NOW
                                     </button>
                                 </div>
-                            </div>
-                    <?php
+                        <?php
                                         }
                                     } else {
                                         echo '<h3 class="text-left mr-96 text-gray-700 tracking-widest dark:text-white font-mono font-bold ">YOU HAVE NOT PROPOSED FOR ANY PROJECT YET</h3>';
                                     }
-                    ?>
+                        ?>
+                    <?php endif ?>
                 <?php endif ?>
-            <?php endif ?>
+                    </div>
 
-            <!-- End of Experience and education grid -->
+
+                    <!-- End of Experience and education grid -->
                 </div>
                 <!-- End of profile tab -->
             </div>

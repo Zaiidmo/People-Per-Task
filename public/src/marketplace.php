@@ -470,9 +470,9 @@
                               </p>
                             </li>
                           </ul>
-                          <p class="text-gray-400 truncate pl-2 lg:pl-4">
+                          <div style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;" class="text-gray-400 truncate  pl-2 lg:pl-4">
                             <?= $Desc ?>
-                          </p>
+                          </div>
                           <div>
                             <ul class="pl-2 py-4 lg:pt-4 lg:py-10 flex gap-5">
                               <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">

@@ -82,49 +82,81 @@ function display_projects()
 
 
     //Create a new project 
-function create_project(){
+    function create_project()
+{
     global $conn;
+
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Retrieve form data
         $Title = $_POST["Title"];
         $Description = $_POST["Description"];
         $category = $_POST["category"];
-        $souscategories = $_POST["souscategories"];
+        $souscategory = $_POST["souscategories"];
 
-
+        // Retrieve CategoryID and SousCategoryID
         $findIDQuery = "SELECT categories.CategoryID, souscategories.SousCategoryID 
                         FROM categories 
-                        INNER JOIN souscategories ON categories.CategoryID = souscategories.SousCategoryID
-                        WHERE CategoryName = '$category' AND SousCategoryName = '$souscategories'";
-        $result = mysqli_query($conn, $findIDQuery);
+                        INNER JOIN souscategories ON categories.CategoryID = souscategories.CategoryID
+                        WHERE CategoryName = ? AND SousCategoryName = ?";
 
-        // Check if the query was successful
-        if ($result) {
-            $row = mysqli_fetch_assoc($result);
-            $userID = $row['UserID'];
-    
-        // Validate and sanitize your data as needed
-    
-        // Example validation: Check if required fields are not empty
-        if (empty($Title) || empty($Description) || empty($category) || empty($souscategories)) {
-            echo "All fields are required.";
+        // Prepare the statement
+        $stmtFindID = mysqli_prepare($conn, $findIDQuery);
+
+        // Check for errors in preparing the statement
+        if (!$stmtFindID) {
+            die("Error preparing statement: " . mysqli_error($conn));
+        }
+
+        // Bind parameters
+        mysqli_stmt_bind_param($stmtFindID, "ss", $category, $souscategory);
+
+        // Execute the statement
+        if (!mysqli_stmt_execute($stmtFindID)) {
+            die("Error executing statement: " . mysqli_error($conn));
+        }
+
+        // Get the result set
+        $result = mysqli_stmt_get_result($stmtFindID);
+
+        // Check for errors in getting the result
+        if (!$result) {
+            die("Error getting result: " . mysqli_error($conn));
+        }
+
+        // Fetch the row
+        $row = mysqli_fetch_assoc($result);
+        $catID = $row['CategoryID'];
+        $subcatID = $row['SousCategoryID'];
+
+        // Check if required fields are not empty
+        if (empty($Title) || empty($Description) || empty($category) || empty($souscategory)) {
+            echo "<script> alert('All fields are required.')</script>";
         } else {
             // Insert data into the database
-            $query = "INSERT INTO your_table_name (freelance_name, Description, category, souscategories) VALUES (?, ?, ?, ?)";
-            
+            $query = "INSERT INTO projects (ProjectTitle, Description, UserID, CategoryID, SousCategoryID) VALUES (?, ?, ?, ?, ?)";
+
             // Use prepared statement to prevent SQL injection
-            $stmt = $conn->prepare($query);
-            $stmt->bind_param("ssss", $Title, $Description, $category, $souscategories);
-    
-            if ($stmt->execute()) {
-                echo "Data inserted successfully.";
+            $stmt = mysqli_prepare($conn, $query);
+
+            // Bind parameters
+            mysqli_stmt_bind_param($stmt, "ssiii", $Title, $Description, $_SESSION['UserID'], $catID, $subcatID);
+
+            // Execute the statement
+            $add_result = mysqli_stmt_execute($stmt);
+
+            if ($add_result) {
+                echo "<script> alert('Project Added Successfully.')</script>"; 
+                echo "<script>window.location.href = 'marketplace.php'</script>";
             } else {
-                echo "Error inserting data: " . $stmt->error;
+                echo "Error Inserting Data: " . mysqli_error($conn);
             }
-    
+
             // Close the statement
-            $stmt->close();
+            mysqli_stmt_close($stmt);
         }
+
+        // Close the statement
+        mysqli_stmt_close($stmtFindID);
     }
 }
-}
+
