@@ -14,7 +14,7 @@
 </head>
 
 <body class="bg-gray-100 dark:bg-gray-900">
-  <?php include '../../includes/header.php'; ?>
+  <?php require '../../includes/header.php'; ?>
 
   <div class="bg-gray-100 dark:bg-gray-900">
     <div>
@@ -417,584 +417,94 @@
             </form>
 
             <!-- Product grid -->
-            <div class="lg:col-span-3">
-              <section class="text-gray-600 body-font">
-                <div class="container px-5 py-24 mx-auto">
-                  <div class="flex flex-wrap -m-4">
-                    <div class="lg:w-1/4 md:w-1/2 p-4 w-full ring-1 rounded-lg ring-gray-300 dark:ring-gray-700 bg-white dark:bg-gray-900">
-                      <h3 class="text-gray-900 font-bold text-lg p-2 lg:p-4 lg:text-xl tracking-widest title-font mb-1 dark:text-white">
-                        <a href="./error404.php">Webflow Interaction Designer</a>
-                      </h3>
-                      <p class="text-sm text-gray-400 pl-2 lg:pl-4">
-                        Fixed-price - Posted 3 days ago
-                      </p>
-                      <ul class="pl-2 py-4 lg:pt-4 lg:py-6 flex gap-20">
-                        <li>
-                          <p class="text-black font-semibold dark:text-white">
-                            $1,000
+            <?php
+            $Query = 'SELECT * FROM projects';
+            $result = mysqli_query($conn, $Query);
+            if (mysqli_num_rows($result) > 0) {
+              while ($row = mysqli_fetch_assoc($result)) {
+                $Title = $row['ProjectTitle'];
+                $Desc = $row['Description'];
+                $Date = $row['Created'];
+            ?>
+                <div class="lg:col-span-3">
+                  <section class="text-gray-600 body-font">
+                    <div class="container px-5 py-24 mx-auto">
+                      <div class="flex flex-wrap -m-4">
+                        <div class="lg:w-1/4 md:w-1/2 p-4 w-full ring-1 rounded-lg ring-gray-300 dark:ring-gray-700 bg-white dark:bg-gray-900">
+                          <h3 class="text-gray-900 font-bold text-lg p-2 lg:p-4 lg:text-xl tracking-widest title-font mb-1 dark:text-white">
+                            <a href="./error404.php"><?= $Title ?> </a>
+                          </h3>
+                          <p class="text-sm text-gray-400 pl-2 lg:pl-4">
+                            <?= $Date ?>
                           </p>
-                          <p class="text-sm pt-1 dark:text-gray-400">
-                            Fixed-price
+                          <ul class="pl-2 py-4 lg:pt-4 lg:py-6 flex gap-20">
+                            <li>
+                              <p class="text-black font-semibold dark:text-white">
+                                $1,000
+                              </p>
+                              <p class="text-sm pt-1 dark:text-gray-400">
+                                Fixed-price
+                              </p>
+                            </li>
+                            <li>
+                              <p class="text-black font-semibold dark:text-white">
+                                Intermediate
+                              </p>
+                              <p class="text-sm pt-1 dark:text-gray-400">
+                                Experience level
+                              </p>
+                            </li>
+                          </ul>
+                          <p class="text-gray-400 truncate pl-2 lg:pl-4">
+                          <?= $Desc ?> 
                           </p>
-                        </li>
-                        <li>
-                          <p class="text-black font-semibold dark:text-white">
-                            Intermediate
-                          </p>
-                          <p class="text-sm pt-1 dark:text-gray-400">
-                            Experience level
-                          </p>
-                        </li>
-                      </ul>
-                      <p class="text-gray-400 truncate pl-2 lg:pl-4">
-                        I need a webflow professional that can also be an
-                        interaction designer that can work by my side (as a
-                        designer) to fix page transitions/ buttons
-                        interactions / loading animation effects into my
-                        website under development with another team (
-                        https://design-ledger.webflow.io/). We also need to
-                        build a Design System / Page for the website. At the
-                        end, we need to also turn this website into a template
-                        for Webflow marketplace. Please share your portfolio
-                        so I can see it. Thanks in advance.
-                      </p>
-                      <div>
-                        <ul class="pl-2 py-4 lg:pt-4 lg:py-10 flex gap-5">
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            website
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            HTML
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            CSS
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            JavaScript
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            Web Flow
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            User Experience
-                          </li>
-                        </ul>
-                        <div class="pl-2 py-4 lg:pt-4 lg:py-10">
-                          <a href="./error404.php" class="bg-orange-600 text-white rounded-3xl py-2 px-4 text-sm font-semibold">See more</a>
+                          <div>
+                            <ul class="pl-2 py-4 lg:pt-4 lg:py-10 flex gap-5">
+                              <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
+                                website
+                              </li>
+                              <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
+                                HTML
+                              </li>
+                              <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
+                                CSS
+                              </li>
+                              <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
+                                JavaScript
+                              </li>
+                              <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
+                                Web Flow
+                              </li>
+                              <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
+                                User Experience
+                              </li>
+                            </ul>
+                            <div class="pl-2 py-4 lg:pt-4 lg:py-10">
+                              <a href="./error404.php" class="bg-orange-600 text-white rounded-3xl py-2 px-4 text-sm font-semibold">See more</a>
+                            </div>
+                          </div>
                         </div>
+                    <?php
+                  }
+                } else {
+                  echo '<h3> NONE FOUND </h3>';
+                }
+                    ?>
                       </div>
                     </div>
-                    <div class="lg:w-1/4 md:w-1/2 p-4 w-full ring-1 rounded-lg ring-gray-300 dark:ring-gray-700 bg-white dark:bg-gray-900 mt-5">
-                      <h3 class="text-gray-900 font-bold text-lg p-2 lg:p-4 lg:text-xl tracking-widest title-font mb-1 dark:text-white">
-                        <a href="./error404.php">Nextjs Sanity CMS/WordPress CMS Typescript
-                          Expert</a>
-                      </h3>
-                      <p class="text-sm text-gray-400 pl-2 lg:pl-4">
-                        Fixed-price - Posted 10 days ago
-                      </p>
-                      <ul class="pl-2 py-4 lg:pt-4 lg:py-6 flex gap-20">
-                        <li>
-                          <p class="text-black font-semibold dark:text-white">
-                            $500
-                          </p>
-                          <p class="text-sm pt-1 dark:text-gray-400">
-                            Fixed-price
-                          </p>
-                        </li>
-                        <li>
-                          <p class="text-black font-semibold dark:text-white">
-                            Beginner - Intermediate
-                          </p>
-                          <p class="text-sm pt-1 dark:text-gray-400">
-                            Entry level
-                          </p>
-                        </li>
-                      </ul>
-                      <p class="text-gray-400 truncate pl-2 lg:pl-4">
-                        We are looking for a skilled and experienced Nextjs
-                        Sanity CMS/WordPress CMS Typescript Expert to join our
-                        team. As an expert in Nextjs and CMS platforms, you
-                        will be responsible for developing and maintaining
-                        websites using Nextjs and Sanity CMS/WordPress CMS,
-                        with a focus on Typescript. You should have a strong
-                        understanding of front-end development, responsive
-                        design, and web performance optimization.
-                      </p>
-                      <div>
-                        <ul class="pl-2 py-4 lg:pt-4 lg:py-10 flex gap-2 md:gap-5">
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            Website
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            HTML
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            CSS
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            JavaScript
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            PHP
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            WordPress
-                          </li>
-                        </ul>
-                        <div class="pl-2 py-4 lg:pt-4 lg:py-10">
-                          <a href="./error404.php" class="bg-orange-600 text-white rounded-3xl py-2 px-4 text-sm font-semibold">See more</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="lg:w-1/4 md:w-1/2 p-4 w-full ring-1 rounded-lg ring-gray-300 dark:ring-gray-700 bg-white dark:bg-gray-900 mt-5">
-                      <h3 class="text-gray-900 font-bold text-lg p-2 lg:p-4 lg:text-xl tracking-widest title-font mb-1 dark:text-white">
-                        <a href="./error404.php">Make bubble website faster</a>
-                      </h3>
-                      <p class="text-sm text-gray-400 pl-2 lg:pl-4">
-                        Fixed-price - Posted 1 days ago
-                      </p>
-                      <ul class="pl-2 py-4 lg:pt-4 lg:py-6 flex gap-20">
-                        <li>
-                          <p class="text-black font-semibold dark:text-white">
-                            $300
-                          </p>
-                          <p class="text-sm pt-1 dark:text-gray-400">
-                            Fixed-price
-                          </p>
-                        </li>
-                        <li>
-                          <p class="text-black font-semibold dark:text-white">
-                            Intermediate
-                          </p>
-                          <p class="text-sm pt-1 dark:text-gray-400">
-                            Experience level
-                          </p>
-                        </li>
-                      </ul>
-                      <p class="text-gray-400 truncate pl-2 lg:pl-4">
-                        i have made some landing pages on bubble and now
-                        trying to make them faster and score better. help me
-                        to achieve this
-                      </p>
-                      <div>
-                        <ul class="pl-2 py-4 lg:pt-4 lg:py-10 flex gap-5">
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            Website
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            HTML
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            CSS
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            JavaScript
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            Web Flow
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            User Experience
-                          </li>
-                        </ul>
-                        <div class="pl-2 py-4 lg:pt-4 lg:py-10">
-                          <a href="./error404.php" class="bg-orange-600 text-white rounded-3xl py-2 px-4 text-sm font-semibold">See more</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="lg:w-1/4 md:w-1/2 p-4 w-full ring-1 rounded-lg ring-gray-300 dark:ring-gray-700 bg-white dark:bg-gray-900 mt-5">
-                      <h3 class="text-gray-900 font-bold text-lg p-2 lg:p-4 lg:text-xl tracking-widest title-font mb-1 dark:text-white">
-                        <a href="./error404.php">Squarespace Developer</a>
-                      </h3>
-                      <p class="text-sm text-gray-400 pl-2 lg:pl-4">
-                        Hourly - Posted 7 days ago
-                      </p>
-                      <ul class="pl-2 py-4 lg:pt-4 lg:py-6 flex gap-20">
-                        <li>
-                          <p class="text-black font-semibold dark:text-white">
-                            $100
-                          </p>
-                          <p class="text-sm pt-1 dark:text-gray-400">
-                            Hourly
-                          </p>
-                        </li>
-                        <li>
-                          <p class="text-black font-semibold dark:text-white">
-                            Expert
-                          </p>
-                          <p class="text-sm pt-1 dark:text-gray-400">
-                            Experience level
-                          </p>
-                        </li>
-                      </ul>
-                      <p class="text-gray-400 truncate pl-2 lg:pl-4">
-                        I need a webflow professional that can also be an
-                        interaction designer that can work by my side (as a
-                        designer) to fix page transitions/ buttons
-                        interactions / loading animation effects into my
-                        website under development with another team (
-                        https://design-ledger.webflow.io/). We also need to
-                        build a Design System / Page for the website. At the
-                        end, we need to also turn this website into a template
-                        for Webflow marketplace. Please share your portfolio
-                        so I can see it. Thanks in advance.
-                      </p>
-                      <div>
-                        <ul class="pl-2 py-4 lg:pt-4 lg:py-10 flex gap-5">
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            Website
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            HTML
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            CSS
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            JavaScript
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            Web Flow
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            User Experience
-                          </li>
-                        </ul>
-                        <div class="pl-2 py-4 lg:pt-4 lg:py-10">
-                          <a href="./error404.php" class="bg-orange-600 text-white rounded-3xl py-2 px-4 text-sm font-semibold">See more</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="lg:w-1/4 md:w-1/2 p-4 w-full ring-1 rounded-lg ring-gray-300 dark:ring-gray-700 bg-white dark:bg-gray-900 mt-5">
-                      <h3 class="text-gray-900 font-bold text-lg p-2 lg:p-4 lg:text-xl tracking-widest title-font mb-1 dark:text-white">
-                        <a href="./error404.php">Webflow Interaction Designer</a>
-                      </h3>
-                      <p class="text-sm text-gray-400 pl-2 lg:pl-4">
-                        Fixed-price - Posted 3 days ago
-                      </p>
-                      <ul class="pl-2 py-4 lg:pt-4 lg:py-6 flex gap-20">
-                        <li>
-                          <p class="text-black font-semibold dark:text-white">
-                            $1,000
-                          </p>
-                          <p class="text-sm pt-1 dark:text-gray-400">
-                            Fixed-price
-                          </p>
-                        </li>
-                        <li>
-                          <p class="text-black font-semibold dark:text-white">
-                            Intermediate
-                          </p>
-                          <p class="text-sm pt-1 dark:text-gray-400">
-                            Experience level
-                          </p>
-                        </li>
-                      </ul>
-                      <p class="text-gray-400 truncate pl-2 lg:pl-4">
-                        I need a webflow professional that can also be an
-                        interaction designer that can work by my side (as a
-                        designer) to fix page transitions/ buttons
-                        interactions / loading animation effects into my
-                        Website under development with another team (
-                        https://design-ledger.webflow.io/). We also need to
-                        build a Design System / Page for the Website. At the
-                        end, we need to also turn this Website into a template
-                        for Webflow marketplace. Please share your portfolio
-                        so I can see it. Thanks in advance.
-                      </p>
-                      <div>
-                        <ul class="pl-2 py-4 lg:pt-4 lg:py-10 flex gap-5">
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            Website
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            HTML
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            CSS
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            JavaScript
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            Web Flow
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            User Experience
-                          </li>
-                        </ul>
-                        <div class="pl-2 py-4 lg:pt-4 lg:py-10">
-                          <a href="./error404.php" class="bg-orange-600 text-white rounded-3xl py-2 px-4 text-sm font-semibold">See more</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="lg:w-1/4 md:w-1/2 p-4 w-full ring-1 rounded-lg ring-gray-300 dark:ring-gray-700 bg-white dark:bg-gray-900 mt-5">
-                      <h3 class="text-gray-900 font-bold text-lg p-2 lg:p-4 lg:text-xl tracking-widest title-font mb-1 dark:text-white">
-                        <a href="./error404.php">Webflow Interaction Designer</a>
-                      </h3>
-                      <p class="text-sm text-gray-400 pl-2 lg:pl-4">
-                        Fixed-price - Posted 3 days ago
-                      </p>
-                      <ul class="pl-2 py-4 lg:pt-4 lg:py-6 flex gap-20">
-                        <li>
-                          <p class="text-black font-semibold dark:text-white">
-                            $1,000
-                          </p>
-                          <p class="text-sm pt-1 dark:text-gray-400">
-                            Fixed-price
-                          </p>
-                        </li>
-                        <li>
-                          <p class="text-black font-semibold dark:text-white">
-                            Intermediate
-                          </p>
-                          <p class="text-sm pt-1 dark:text-gray-400">
-                            Experience level
-                          </p>
-                        </li>
-                      </ul>
-                      <p class="text-gray-400 truncate pl-2 lg:pl-4">
-                        I need a webflow professional that can also be an
-                        interaction designer that can work by my side (as a
-                        designer) to fix page transitions/ buttons
-                        interactions / loading animation effects into my
-                        Website under development with another team (
-                        https://design-ledger.webflow.io/). We also need to
-                        build a Design System / Page for the Website. At the
-                        end, we need to also turn this Website into a template
-                        for Webflow marketplace. Please share your portfolio
-                        so I can see it. Thanks in advance.
-                      </p>
-                      <div>
-                        <ul class="pl-2 py-4 lg:pt-4 lg:py-10 flex gap-5">
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            Website
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            HTML
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            CSS
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            JavaScript
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            Web Flow
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            User Experience
-                          </li>
-                        </ul>
-                        <div class="pl-2 py-4 lg:pt-4 lg:py-10">
-                          <a href="./error404.php" class="bg-orange-600 text-white rounded-3xl py-2 px-4 text-sm font-semibold">See more</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="lg:w-1/4 md:w-1/2 p-4 w-full ring-1 rounded-lg ring-gray-300 dark:ring-gray-700 bg-white dark:bg-gray-900 mt-5">
-                      <h3 class="text-gray-900 font-bold text-lg p-2 lg:p-4 lg:text-xl tracking-widest title-font mb-1 dark:text-white">
-                        <a href="./error404.php">Webflow Interaction Designer</a>
-                      </h3>
-                      <p class="text-sm text-gray-400 pl-2 lg:pl-4">
-                        Fixed-price - Posted 3 days ago
-                      </p>
-                      <ul class="pl-2 py-4 lg:pt-4 lg:py-6 flex gap-20">
-                        <li>
-                          <p class="text-black font-semibold dark:text-white">
-                            $1,000
-                          </p>
-                          <p class="text-sm pt-1 dark:text-gray-400">
-                            Fixed-price
-                          </p>
-                        </li>
-                        <li>
-                          <p class="text-black font-semibold dark:text-white">
-                            Intermediate
-                          </p>
-                          <p class="text-sm pt-1 dark:text-gray-400">
-                            Experience level
-                          </p>
-                        </li>
-                      </ul>
-                      <p class="text-gray-400 truncate pl-2 lg:pl-4">
-                        I need a webflow professional that can also be an
-                        interaction designer that can work by my side (as a
-                        designer) to fix page transitions/ buttons
-                        interactions / loading animation effects into my
-                        website under development with another team (
-                        https://design-ledger.webflow.io/). We also need to
-                        build a Design System / Page for the website. At the
-                        end, we need to also turn this website into a template
-                        for Webflow marketplace. Please share your portfolio
-                        so I can see it. Thanks in advance.
-                      </p>
-                      <div>
-                        <ul class="pl-2 py-4 lg:pt-4 lg:py-10 flex gap-5">
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            Website
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            HTML
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            CSS
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            JavaScript
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            Web Flow
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            User Experience
-                          </li>
-                        </ul>
-                        <div class="pl-2 py-4 lg:pt-4 lg:py-10">
-                          <a href="./error404.php" class="bg-orange-600 text-white rounded-3xl py-2 px-4 text-sm font-semibold">See more</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="lg:w-1/4 md:w-1/2 p-4 w-full ring-1 rounded-lg ring-gray-300 dark:ring-gray-700 bg-white dark:bg-gray-900 mt-5">
-                      <h3 class="text-gray-900 font-bold text-lg p-2 lg:p-4 lg:text-xl tracking-widest title-font mb-1 dark:text-white">
-                        <a href="./error404.php">Webflow Interaction Designer</a>
-                      </h3>
-                      <p class="text-sm text-gray-400 pl-2 lg:pl-4">
-                        Fixed-price - Posted 3 days ago
-                      </p>
-                      <ul class="pl-2 py-4 lg:pt-4 lg:py-6 flex gap-20">
-                        <li>
-                          <p class="text-black font-semibold dark:text-white">
-                            $1,000
-                          </p>
-                          <p class="text-sm pt-1 dark:text-gray-400">
-                            Fixed-price
-                          </p>
-                        </li>
-                        <li>
-                          <p class="text-black font-semibold dark:text-white">
-                            Intermediate
-                          </p>
-                          <p class="text-sm pt-1 dark:text-gray-400">
-                            Experience level
-                          </p>
-                        </li>
-                      </ul>
-                      <p class="text-gray-400 truncate pl-2 lg:pl-4">
-                        I need a webflow professional that can also be an
-                        interaction designer that can work by my side (as a
-                        designer) to fix page transitions/ buttons
-                        interactions / loading animation effects into my
-                        website under development with another team (
-                        https://design-ledger.webflow.io/). We also need to
-                        build a Design System / Page for the website. At the
-                        end, we need to also turn this website into a template
-                        for Webflow marketplace. Please share your portfolio
-                        so I can see it. Thanks in advance.
-                      </p>
-                      <div>
-                        <ul class="pl-2 py-4 lg:pt-4 lg:py-10 flex gap-5">
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            Website
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            HTML
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            CSS
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            JavaScript
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            Web Flow
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            User Experience
-                          </li>
-                        </ul>
-                        <div class="pl-2 py-4 lg:pt-4 lg:py-10">
-                          <a href="./error404.php" class="bg-orange-600 text-white rounded-3xl py-2 px-4 text-sm font-semibold">See more</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="lg:w-1/4 md:w-1/2 p-4 w-full ring-1 rounded-lg ring-gray-300 dark:ring-gray-700 bg-white dark:bg-gray-900 mt-5">
-                      <h3 class="text-gray-900 font-bold text-lg p-2 lg:p-4 lg:text-xl tracking-widest title-font mb-1 dark:text-white">
-                        <a href="./error404.php">Webflow Interaction Designer</a>
-                      </h3>
-                      <p class="text-sm text-gray-400 pl-2 lg:pl-4">
-                        Fixed-price - Posted 3 days ago
-                      </p>
-                      <ul class="pl-2 py-4 lg:pt-4 lg:py-6 flex gap-20">
-                        <li>
-                          <p class="text-black font-semibold dark:text-white">
-                            $1,000
-                          </p>
-                          <p class="text-sm pt-1 dark:text-gray-400">
-                            Fixed-price
-                          </p>
-                        </li>
-                        <li>
-                          <p class="text-black font-semibold dark:text-white">
-                            Intermediate
-                          </p>
-                          <p class="text-sm pt-1 dark:text-gray-400">
-                            Experience level
-                          </p>
-                        </li>
-                      </ul>
-                      <p class="text-gray-400 truncate pl-2 lg:pl-4">
-                        I need a webflow professional that can also be an
-                        interaction designer that can work by my side (as a
-                        designer) to fix page transitions/ buttons
-                        interactions / loading animation effects into my
-                        website under development with another team (
-                        https://design-ledger.webflow.io/). We also need to
-                        build a Design System / Page for the website. At the
-                        end, we need to also turn this website into a template
-                        for Webflow marketplace. Please share your portfolio
-                        so I can see it. Thanks in advance.
-                      </p>
-                      <div>
-                        <ul class="pl-2 py-4 lg:pt-4 lg:py-10 flex gap-5">
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            Website
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            HTML
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            CSS
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            JavaScript
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            Web Flow
-                          </li>
-                          <li class="bg-orange-300 text-orange-600 rounded-3xl py-1.5 px-3 text-xs font-semibold">
-                            User Experience
-                          </li>
-                        </ul>
-                        <div class="pl-2 py-4 lg:pt-4 lg:py-10">
-                          <a href="./error404.php" class="bg-orange-600 text-white rounded-3xl py-2 px-4 text-sm font-semibold">See more</a>
-                        </div>
-                      </div>
-                    </div>
+                  </section>
+                  <div class="flex">
+                    <!-- Previous Button -->
+                    <a href="#" class="flex items-center justify-center px-4 h-10 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                      Previous
+                    </a>
+
+                    <!-- Next Button -->
+                    <a href="#" class="flex items-center justify-center px-4 h-10 ml-3 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                      Next
+                    </a>
                   </div>
                 </div>
-              </section>
-              <div class="flex">
-                <!-- Previous Button -->
-                <a href="#" class="flex items-center justify-center px-4 h-10 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                  Previous
-                </a>
-
-                <!-- Next Button -->
-                <a href="#" class="flex items-center justify-center px-4 h-10 ml-3 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                  Next
-                </a>
-              </div>
-            </div>
           </div>
         </section>
       </main>
