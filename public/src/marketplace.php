@@ -436,6 +436,7 @@
 
                 if (mysqli_num_rows($result) > 0) {
                   while ($row = mysqli_fetch_assoc($result)) {
+                    $id = $row['ProjectID'];
                     $Title = $row['ProjectTitle'];
                     $Desc = $row['Description'];
                     $Date = $row['Created'];
@@ -448,7 +449,7 @@
                     <div class="lg:w-1/4 md:w-1/2 p-4 w-full ring-1 rounded-lg mt-5 ring-gray-300 dark:ring-gray-700 bg-white dark:bg-gray-900">
                       <div class="flex justify-between">
                         <h3 class="text-gray-900 font-bold text-lg p-2 lg:p-4 lg:text-xl tracking-widest title-font mb-1 dark:text-white">
-                          <a href="./single_page.php"><?= $Title ?> </a>
+                          <a href="./single_page.php?id=<?=$id?>"><?= $Title ?> </a>
                         </h3>
                         <p class="text-sm text-gray-400 pl-2 lg:pl-4">
                           Posted by <?= $owner ?>
@@ -487,7 +488,7 @@
                           <?php endforeach; ?>
                         </ul>
                         <div class="pl-2 py-4 lg:pt-4 lg:py-10">
-                          <a href="./single_page.php" class="bg-orange-600 text-white rounded-3xl py-2 px-4 text-sm font-semibold">See more</a>
+                          <a href="./single_page.php?id=<?=$id?>" class="bg-orange-600 text-white rounded-3xl py-2 px-4 text-sm font-semibold">See more</a>
                         </div>
                       </div>
                     </div>
