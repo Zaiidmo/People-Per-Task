@@ -93,6 +93,8 @@ function create_project()
         $category = $_POST["category"];
         $souscategory = $_POST["souscategories"];
         $tags = $_POST["tags"];
+        $price = $_POST["Price"];
+        $Deadline = $_POST["deadline"];
 
         // Retrieve CategoryID and SousCategoryID
         $findIDQuery = "SELECT categories.CategoryID, souscategories.SousCategoryID 
@@ -130,17 +132,17 @@ function create_project()
         $subcatID = $row['SousCategoryID'];
 
         // Check if required fields are not empty
-        if (empty($Title) || empty($Description) || empty($category) || empty($souscategory)) {
+        if (empty($Title) || empty($Description)|| empty($Deadline) || empty($price) || empty($category) || empty($souscategory)) {
             echo "<script> alert('All fields are required.')</script>";
         } else {
             // Insert data into the projects table
-            $query = "INSERT INTO projects (ProjectTitle, Description, UserID, CategoryID, SousCategoryID) VALUES (?, ?, ?, ?, ?)";
+            $query = "INSERT INTO projects (ProjectTitle, Description, deadline, price, UserID, CategoryID, SousCategoryID) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             // Use prepared statement to prevent SQL injection
             $stmt = mysqli_prepare($conn, $query);
 
             // Bind parameters
-            mysqli_stmt_bind_param($stmt, "ssiii", $Title, $Description, $_SESSION['UserID'], $catID, $subcatID);
+            mysqli_stmt_bind_param($stmt, "sssiiii", $Title, $Description, $Deadline, $price, $_SESSION['UserID'], $catID, $subcatID);
 
             // Execute the statement
             $add_result = mysqli_stmt_execute($stmt);
