@@ -416,24 +416,39 @@
               </div>
             </form>
 
+
             <!-- Product grid -->
-            <?php
-            $Query = 'SELECT * FROM projects';
-            $result = mysqli_query($conn, $Query);
-            if (mysqli_num_rows($result) > 0) {
-              while ($row = mysqli_fetch_assoc($result)) {
-                $Title = $row['ProjectTitle'];
-                $Desc = $row['Description'];
-                $Date = $row['Created'];
-            ?>
-                <div class="lg:col-span-3">
-                  <section class="text-gray-600 body-font">
-                    <div class="container px-5 py-24 mx-auto">
-                      <div class="flex flex-wrap -m-4">
-                        <div class="lg:w-1/4 md:w-1/2 p-4 w-full ring-1 rounded-lg ring-gray-300 dark:ring-gray-700 bg-white dark:bg-gray-900">
+            <div class="lg:col-span-3">
+              <section class="text-gray-600 body-font">
+                <?php if ($_SESSION['UserType'] === 'Client') : ?>
+                  <a href="create-new.php" class="inline-block"><button class="inline-block mb-7 font-inter text-white bg-primary-600 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-800 dark:focus:ring-primary-800" type="button">
+                      + Create a New Project
+                    </button></a>
+                <?php endif ?>
+                <div class="container px-5 py-24 pt-0 mx-auto">
+                  <div class="flex flex-wrap -m-4">
+                    <?php
+                    $Query = 'SELECT projects.*, users.UserName 
+                    FROM projects
+                    INNER JOIN users ON projects.UserID = users.UserID';
+                    $result = mysqli_query($conn, $Query);
+                    if (mysqli_num_rows($result) > 0) {
+                      while ($row = mysqli_fetch_assoc($result)) {
+                        $Title = $row['ProjectTitle'];
+                        $Desc = $row['Description'];
+                        $Date = $row['Created'];
+                        $owner = $row['UserName']
+                    ?>
+
+                        <div class="lg:w-1/4 md:w-1/2 p-4 w-full ring-1 rounded-lg mt-5 ring-gray-300 dark:ring-gray-700 bg-white dark:bg-gray-900">
+                          <div class="flex justify-between items-center">
                           <h3 class="text-gray-900 font-bold text-lg p-2 lg:p-4 lg:text-xl tracking-widest title-font mb-1 dark:text-white">
-                            <a href="./error404.php"><?= $Title ?> </a>
+                            <a href="./single_page.php"><?= $Title ?> </a>
                           </h3>
+                          <p class="text-sm text-gray-400 pl-2 lg:pl-4">
+                            Posted by <?= $owner ?>
+                          </p>
+                          </div>
                           <p class="text-sm text-gray-400 pl-2 lg:pl-4">
                             <?= $Date ?>
                           </p>
@@ -456,7 +471,7 @@
                             </li>
                           </ul>
                           <p class="text-gray-400 truncate pl-2 lg:pl-4">
-                          <?= $Desc ?> 
+                            <?= $Desc ?>
                           </p>
                           <div>
                             <ul class="pl-2 py-4 lg:pt-4 lg:py-10 flex gap-5">
@@ -480,31 +495,31 @@
                               </li>
                             </ul>
                             <div class="pl-2 py-4 lg:pt-4 lg:py-10">
-                              <a href="./error404.php" class="bg-orange-600 text-white rounded-3xl py-2 px-4 text-sm font-semibold">See more</a>
+                              <a href="./single_page.php" class="bg-orange-600 text-white rounded-3xl py-2 px-4 text-sm font-semibold">See more</a>
                             </div>
                           </div>
                         </div>
                     <?php
-                  }
-                } else {
-                  echo '<h3> NONE FOUND </h3>';
-                }
+                      }
+                    } else {
+                      echo '<h3> NONE FOUND </h3>';
+                    }
                     ?>
-                      </div>
-                    </div>
-                  </section>
-                  <div class="flex">
-                    <!-- Previous Button -->
-                    <a href="#" class="flex items-center justify-center px-4 h-10 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                      Previous
-                    </a>
-
-                    <!-- Next Button -->
-                    <a href="#" class="flex items-center justify-center px-4 h-10 ml-3 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                      Next
-                    </a>
                   </div>
                 </div>
+              </section>
+              <div class="flex">
+                <!-- Previous Button -->
+                <a href="#" class="flex items-center justify-center px-4 h-10 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                  Previous
+                </a>
+
+                <!-- Next Button -->
+                <a href="#" class="flex items-center justify-center px-4 h-10 ml-3 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                  Next
+                </a>
+              </div>
+            </div>
           </div>
         </section>
       </main>
