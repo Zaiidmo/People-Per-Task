@@ -79,3 +79,52 @@ function display_projects()
             }
         }
     }
+
+
+    //Create a new project 
+function create_project(){
+    global $conn;
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Retrieve form data
+        $Title = $_POST["Title"];
+        $Description = $_POST["Description"];
+        $category = $_POST["category"];
+        $souscategories = $_POST["souscategories"];
+
+
+        $findIDQuery = "SELECT categories.CategoryID, souscategories.SousCategoryID 
+                        FROM categories 
+                        INNER JOIN souscategories ON categories.CategoryID = souscategories.SousCategoryID
+                        WHERE CategoryName = '$category' AND SousCategoryName = '$souscategories'";
+        $result = mysqli_query($conn, $findIDQuery);
+
+        // Check if the query was successful
+        if ($result) {
+            $row = mysqli_fetch_assoc($result);
+            $userID = $row['UserID'];
+    
+        // Validate and sanitize your data as needed
+    
+        // Example validation: Check if required fields are not empty
+        if (empty($Title) || empty($Description) || empty($category) || empty($souscategories)) {
+            echo "All fields are required.";
+        } else {
+            // Insert data into the database
+            $query = "INSERT INTO your_table_name (freelance_name, Description, category, souscategories) VALUES (?, ?, ?, ?)";
+            
+            // Use prepared statement to prevent SQL injection
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("ssss", $Title, $Description, $category, $souscategories);
+    
+            if ($stmt->execute()) {
+                echo "Data inserted successfully.";
+            } else {
+                echo "Error inserting data: " . $stmt->error;
+            }
+    
+            // Close the statement
+            $stmt->close();
+        }
+    }
+}
+}
