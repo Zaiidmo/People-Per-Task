@@ -117,7 +117,7 @@
                     <h3 class="px-4 py-2 font-semibold text-xl text-gray-700 dark:text-gray-300 ">Posted Proposals</h3>
                     <?php
                     // Fetch Freelancer proposals for the specified project
-                    $FreelancerIDQuery = "SELECT offers.*, freelances.FreelanceName, projects.ProjectID
+                    $FreelancerIDQuery = "SELECT offers.*, freelances.*, projects.ProjectID
         FROM offers 
         INNER JOIN freelances ON offers.FreelanceID = freelances.FreelanceID
         INNER JOIN projects ON offers.ProjectID = projects.ProjectID
@@ -132,15 +132,20 @@
                         while ($rowClientID = mysqli_fetch_assoc($resultClientID)) {
                             // Extract proposal details
                             $proposalID = $rowClientID['OfferID'];
+                            $proposal = $rowClientID['proposal'];
                             $freelancerName = $rowClientID['FreelanceName'];
                             $proposalStatus = $rowClientID['status'];
+                            $freelancerID = $rowClientID['FreelanceID'];
 
                             // Display proposal information
                     ?>
                             <div class="bg-white dark:bg-gray-800 border mt-5 rounded-xl border-gray-300 p-5 dark:border-gray-700 shadow-md flex justify-between ">
-                                <a href="">
-                                    <h3 class="text-left px-4 py-2 text-gray-700 tracking-widest dark:text-white font-mono font-bold block">Freelancer Name: <?= $freelancerName ?></h3>
-                                </a>
+                                <div class="flex flex-col">
+                                    <a href="./profile.php?id=<?= $freelancerID ?>">
+                                        <h3 class="text-left px-4 py-2 text-gray-700 tracking-widest dark:text-white font-mono font-bold inline-block">Freelancer Name: <?= $freelancerName ?></h3>
+                                    </a>
+                                    <p class="text-left px-4 py-2 text-gray-700 tracking-widest dark:text-white block"> <?= $proposal ?> </p>
+                                </div>
                                 <div class="flex gap-4">
                                     <?php if ($proposalStatus === 'pending') : ?>
                                         <form action="../../app/controllers/proposal_status.php?id=<?= $proposalID ?>" method="POST">
@@ -148,7 +153,7 @@
                                             <button name="Deny" style="background-color: red;" class="rounded-full font-bold text-white p-2 ">DENY</button>
                                         </form>
                                     <?php else : ?>
-                                        <div style="background-color: Gray; padding-top: 1" class="w-fit rounded-full px-3 text-xs font-semibold  text-black p-2">
+                                        <div style="background-color: Gray; padding-top: 1" class="w-fit h-fit rounded-full px-3  text-xs font-semibold  text-black p-2">
                                             <?= $proposalStatus ?>
                                         </div>
                                     <?php endif ?>
