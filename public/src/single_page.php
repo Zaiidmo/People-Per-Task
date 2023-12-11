@@ -112,6 +112,58 @@
                         </form>
                     </div>
                 </div>
+            <?php elseif (isset($_SESSION['UserID']) && $_SESSION['UserType'] === 'Client') : ?>
+                <div class="bg-white dark:bg-gray-800 border mt-5 rounded-xl border-gray-300 p-5 dark:border-gray-700 shadow-md flex flex-col ">
+                    <h3 class="px-4 py-2 font-semibold text-xl text-gray-700 dark:text-gray-300 ">Posted Proposals</h3>
+                    <?php
+                    // Fetch Freelancer proposals for the specified project
+                    $FreelancerIDQuery = "SELECT offers.*, freelances.FreelanceName, projects.ProjectID
+        FROM offers 
+        INNER JOIN freelances ON offers.FreelanceID = freelances.FreelanceID
+        INNER JOIN projects ON offers.ProjectID = projects.ProjectID
+        WHERE projects.ProjectID = ?";
+                    $stmtClientID = mysqli_prepare($conn, $FreelancerIDQuery);
+                    mysqli_stmt_bind_param($stmtClientID, 'i', $_GET['id']);  // Corrected parameter order
+                    mysqli_stmt_execute($stmtClientID);
+                    $resultClientID = mysqli_stmt_get_result($stmtClientID);
+
+                    // Display the proposals
+                    if (mysqli_num_rows($resultClientID) > 0) {
+                        while ($rowClientID = mysqli_fetch_assoc($resultClientID)) {
+                            // Extract proposal details
+                            $proposalID = $rowClientID['OfferID'];
+                            $freelancerName = $rowClientID['FreelanceName'];
+                            $proposalStatus = $rowClientID['status'];
+
+                            // Display proposal information
+                    ?>
+                            <div class="bg-white dark:bg-gray-800 border mt-5 rounded-xl border-gray-300 p-5 dark:border-gray-700 shadow-md flex justify-between ">
+                                <a href="">
+                                    <h3 class="text-left px-4 py-2 text-gray-700 tracking-widest dark:text-white font-mono font-bold block">Freelancer Name: <?= $freelancerName ?></h3>
+                                </a>
+                                <div class="flex gap-4">
+                                    <?php if ($proposalStatus === 'pending') : ?>
+                                        <form action="../../app/controllers/proposal_status.php?id=<?= $proposalID ?>" method="POST">
+                                            <button name="Approve" class="rounded-full bg-green-500 p-2">APPROVE</button>
+                                            <button name="Deny" style="background-color: red;" class="rounded-full font-bold text-white p-2 ">DENY</button>
+                                        </form>
+                                    <?php else : ?>
+                                        <div style="background-color: Gray; padding-top: 1" class="w-fit rounded-full px-3 text-xs font-semibold  text-black p-2">
+                                            <?= $proposalStatus ?>
+                                        </div>
+                                    <?php endif ?>
+                                </div>
+                            </div>
+                    <?php
+                        }
+                    } else {
+                        echo '<p>No proposals posted for this project yet.</p>';
+                    }
+
+                    // Close the statement
+                    mysqli_stmt_close($stmtClientID);
+                    ?>
+                </div>
             <?php endif ?>
         </div>
     <?php
