@@ -18,6 +18,7 @@ function Approve(){
     $stmt = mysqli_prepare($conn , $query);
     mysqli_stmt_bind_param($stmt, "i", $id);
     mysqli_stmt_execute($stmt);
+    echo '<script> alert("Proposal Approved") </script>';
     echo '<script> window.location.href = "../../public/src/profile.php" </script>';
 }
 function Deny(){
@@ -29,5 +30,6 @@ function Deny(){
     $stmt=mysqli_prepare($conn , $query);
     mysqli_stmt_bind_param($stmt, "i", $id);
     mysqli_stmt_execute($stmt);
+    echo '<script> alert("Proposal Denied") </script>';
     echo '<script> window.location.href = "../../public/src/profile.php" </script>';
 }

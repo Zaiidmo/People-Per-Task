@@ -164,7 +164,7 @@ function create_project()
 
                     if ($tagResult && $tagRow = mysqli_fetch_assoc($tagResult)) {
                         // Tag already exists, get its ID
-                        $tagID = $tagRow['id'];
+                        $tagID = $tagRow['Tag_id'];
                     } else {
                         // Tag does not exist, add it to the tags table
                         $addTagQuery = "INSERT INTO tags (tag_name) VALUES (?)";

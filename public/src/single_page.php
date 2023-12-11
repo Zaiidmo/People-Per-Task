@@ -144,7 +144,8 @@
                                     <a href="./profile.php?id=<?= $freelancerID ?>">
                                         <h3 class="text-left px-4 py-2 text-gray-700 tracking-widest dark:text-white font-mono font-bold inline-block">Freelancer Name: <?= $freelancerName ?></h3>
                                     </a>
-                                    <p class="text-left px-4 py-2 text-gray-700 tracking-widest dark:text-white block"> <?= $proposal ?> </p>
+                                    <p class="text-left px-4 py-2 font-mono text-gray-700 tracking-widest dark:text-white block"> <?= $proposal ?> </p>
+                                    <p class="text-left font-mono px-4 py-2 text-gray-700 tracking-widest dark:text-white block"> My Price : <?= $rowClientID['Amount'] ?> $ </p>
                                 </div>
                                 <div class="flex gap-4">
                                     <?php if ($proposalStatus === 'pending') : ?>
