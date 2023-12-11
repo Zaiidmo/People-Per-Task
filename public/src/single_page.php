@@ -121,9 +121,9 @@
         FROM offers 
         INNER JOIN freelances ON offers.FreelanceID = freelances.FreelanceID
         INNER JOIN projects ON offers.ProjectID = projects.ProjectID
-        WHERE projects.ProjectID = ?";
+        WHERE projects.ProjectID = ? AND projects.UserID = ?";
                     $stmtClientID = mysqli_prepare($conn, $FreelancerIDQuery);
-                    mysqli_stmt_bind_param($stmtClientID, 'i', $_GET['id']);  // Corrected parameter order
+                    mysqli_stmt_bind_param($stmtClientID, 'ii', $_GET['id'], $_SESSION['UserID']);  // Corrected parameter order
                     mysqli_stmt_execute($stmtClientID);
                     $resultClientID = mysqli_stmt_get_result($stmtClientID);
 
@@ -163,7 +163,7 @@
                     <?php
                         }
                     } else {
-                        echo '<p>No proposals posted for this project yet.</p>';
+                        echo '<p></p>';
                     }
 
                     // Close the statement
