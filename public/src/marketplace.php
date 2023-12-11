@@ -223,6 +223,14 @@
       </div>
 
       <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <form id="searchform" class="mt-20">
+          <label for="default-search" class="mb-2 mt-20 pl-4 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+          <div class="relative flex gap-4 bg-gray-50 dark:bg-gray-700  border-gray-300 rounded-lg">
+            <input type="search" name="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white " placeholder="Search Mockups, Logos..." required>
+            <button type="submit" class="text-white end-2.5 bottom-2.5 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Search</button>
+          </div>
+        </form>
+
         <div class="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
           <h1 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
             Find Freelance Jobs
@@ -446,10 +454,10 @@
                     $price = $row['price'];
                 ?>
 
-                    <div class="lg:w-1/4 md:w-1/2 p-4 w-full ring-1 rounded-lg mt-5 ring-gray-300 dark:ring-gray-700 bg-white dark:bg-gray-900">
+                    <div id="project_data" class="lg:w-1/4 md:w-1/2 p-4 w-full ring-1 rounded-lg mt-5 ring-gray-300 dark:ring-gray-700 bg-white dark:bg-gray-900">
                       <div class="flex justify-between">
                         <h3 class="text-gray-900 font-bold text-lg p-2 lg:p-4 lg:text-xl tracking-widest title-font mb-1 dark:text-white">
-                          <a href="./single_page.php?id=<?=$id?>"><?= $Title ?> </a>
+                          <a href="./single_page.php?id=<?= $id ?>"><?= $Title ?> </a>
                         </h3>
                         <p class="text-sm text-gray-400 pl-2 lg:pl-4">
                           Posted by <?= $owner ?>
@@ -464,7 +472,7 @@
                             Fixed-price
                           </p>
                           <p class="text-sm pt-1 dark:text-gray-400">
-                            <?= $price . ' $'?>
+                            <?= $price . ' $' ?>
                           </p>
                         </li>
                         <li>
@@ -488,7 +496,7 @@
                           <?php endforeach; ?>
                         </ul>
                         <div class="pl-2 py-4 lg:pt-4 lg:py-10">
-                          <a href="./single_page.php?id=<?=$id?>" class="bg-orange-600 text-white rounded-3xl py-2 px-4 text-sm font-semibold">See more</a>
+                          <a href="./single_page.php?id=<?= $id ?>" class="bg-orange-600 text-white rounded-3xl py-2 px-4 text-sm font-semibold">See more</a>
                         </div>
                       </div>
                     </div>
@@ -520,8 +528,30 @@
   </div>
   </div>
   <?php include '../../includes/footer.php'; ?>
-
   <script src="../assets/js/theme.js"></script>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script type="text/javascript" >
+        $(document).ready(function(){
+            $("#default-search").keyup(function(){
+             
+                var input = $(this).val();
+
+                if(input == "") input='all';
+
+                $.ajax({
+                      
+                      url:"../../app/controllers/search.php",
+                      method:"POST",
+                      data:{input:input},
+                      
+                      success:function(data){
+                        $("#project_data").html(data);
+                      }
+                  });
+            })
+        })
+  
+    </script>
 
 </html>
