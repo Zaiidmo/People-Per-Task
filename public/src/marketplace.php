@@ -531,27 +531,28 @@
   <script src="../assets/js/theme.js"></script>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script type="text/javascript" >
-        $(document).ready(function(){
-            $("#default-search").keyup(function(){
-             
-                var input = $(this).val();
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#default-search").keyup(function() {
 
-                if(input == "") input='all';
+      var input = $(this).val();
 
-                $.ajax({
-                      
-                      url:"../../app/controllers/search.php",
-                      method:"POST",
-                      data:{input:input},
-                      
-                      success:function(data){
-                        $("#project_data").html(data);
-                      }
-                  });
-            })
-        })
-  
-    </script>
+      if (input == "") input = 'all';
+
+      $.ajax({
+
+        url: "../../app/controllers/search.php",
+        method: "POST",
+        data: {
+          input: input
+        },
+
+        success: function(data) {
+          $("#project_data").html(data);
+        }
+      });
+    })
+  })
+</script>
 
 </html>

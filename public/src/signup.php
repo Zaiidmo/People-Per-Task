@@ -14,6 +14,10 @@
 
 <body class="dark:bg-gray-900 ">
   <?php include '../../includes/header.php'; ?>
+  <?php if(isset($_SESSION['UserID'])): ?>
+  <script>alert('You Can\'t Register Twice !!')</script>
+  <script>window.location.href = './profile.php'</script>
+  <?php else : ?>
 
   <!--Section signUp-->
   <section class="flex justify-center m-auto items-center max-w-screen-xl py-32 dark:bg-gray-900">
@@ -80,6 +84,7 @@
     </div>
   </section>
   <?php include '../../includes/footer.php'; ?>
+  <?php endif  ?>
 
 </body>
 <script src="../assets/js/theme.js"></script>

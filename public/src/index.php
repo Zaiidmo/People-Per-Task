@@ -64,7 +64,7 @@
                 <!-- Add your SVG or icon code here -->
                 <h3 class="text-xl font-bold dark:text-white ml-2"> <?= $P_title ?> </h3>
               </div>
-              <p class="text-gray-500 dark:text-gray-400"><?= $P_Description ?></p>
+              <div class="overflow-hidden text-gray-500 dark:text-gray-400"><?= $P_Description ?></div>
               <button type="button" class="text-orange-600 hover:text-black dark:hover:text-white focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-3xl text-xl px-3 py-2 text-center ml-1 md:ml-1 mt-5 dark:focus:ring-orange-600 ">APPLY NOW</button>
             </div>
         <?php

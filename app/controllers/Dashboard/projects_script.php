@@ -85,7 +85,6 @@ function display_projects()
 function create_project()
 {
     global $conn;
-
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Retrieve form data
         $Title = $_POST["Title"];
