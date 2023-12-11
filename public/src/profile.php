@@ -123,6 +123,7 @@ session_start();
                                     $result = mysqli_query($conn, $sql);
                                     if (mysqli_num_rows($result) > 0) {
                                         while ($row = mysqli_fetch_assoc($result)) {
+                                            $P_id = $row['ProjectID'];
                                             $P_title = $row['ProjectTitle'];
                                             $P_desc = $row['Description'];
                                             $res = $row['UserName'];
@@ -140,20 +141,18 @@ session_start();
                                             <button type="button" class="text-orange-600 hover:text-black dark:hover:text-white focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-3xl text-sm px-3 py-2 text-left ml-1 md:ml-1 mt-5 dark:focus:ring-orange-600 ">Posted By <?= $res ?>
                                             </button>
                                         </div>
-                                <?php
+                            </div>
+                    <?php
                                         }
                                     } else {
                                         echo '<h3 class="text-left mr-96 text-gray-700 tracking-widest dark:text-white font-mono font-bold ">YOU HAVE NOT POSTED ANY PROJECT YET</h3>';
                                     }
-                                ?>
-                            </div>
+                    ?>
+                <?php elseif ($_SESSION['UserType'] === 'Client') : ?>
+                    <h3 class="text-left mr-96 text-gray-700 tracking-widest dark:text-white font-mono font-bold ">MY POSTED PROJECTS</h3>
+                    <div class="grid grid-cols-3 gap-10">
 
-                        <?php elseif ($_SESSION['UserType'] === 'Client') : ?>
-                            <h3 class="text-left mr-96 text-gray-700 tracking-widest dark:text-white font-mono font-bold ">MY POSTED PROJECTS</h3>
-                        </div>
-                        <div class="grid grid-cols-3 gap-10">
-
-                            <?php
+                        <?php
                                     $conn = mysqli_connect("localhost", "root", "", "peoplepertask");
 
                                     if (!$conn) {
@@ -163,41 +162,7 @@ session_start();
                                     $result = mysqli_query($conn, $sql);
                                     if (mysqli_num_rows($result) > 0) {
                                         while ($row = mysqli_fetch_assoc($result)) {
-                                            $P_title = $row['ProjectTitle'];
-                                            $P_desc = $row['Description'];
-
-                            ?>
-
-                                    <div class="w-64 mt-6 bg-white p-8 border border-gray-300 dark:border-gray-700  rounded-lg dark:bg-gray-800 shadow-md">
-                                        <div class="flex justify-between items-center content-center mb-4 w-fit h-fit rounded-full lg:h-fit lg:w-fit  ">
-                                            <svg width="40" height="42" viewBox="0 0 37 39" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[#00373E] dark:text-white">
-                                                <path d="M23.3543 23.5229L36.3887 0.6875H27.6543L14.5863 23.5145C14.57 23.5346 14.561 23.5598 14.561 23.5858C14.561 23.6118 14.57 23.637 14.5863 23.6572L22.8924 38.2537C22.926 38.3125 22.9596 38.3125 23.0268 38.3125H31.6855L23.3459 23.6404C23.3391 23.6213 23.3363 23.601 23.3377 23.5808C23.3392 23.5605 23.3448 23.5408 23.3543 23.5229ZM15.6361 16.1574L10.6895 7.49023C10.673 7.4611 10.6482 7.43754 10.6183 7.42257C10.5884 7.40761 10.5547 7.40193 10.5215 7.40625H2.45898L7.40566 16.1742C7.41663 16.1948 7.41962 16.2187 7.41406 16.2414L0.611328 27.5625H8.74102C8.76856 27.566 8.7965 27.5605 8.8207 27.5469C8.8449 27.5333 8.86407 27.5123 8.87539 27.4869L15.6361 16.2582C15.6445 16.2251 15.6445 16.1905 15.6361 16.1574Z" fill="currentcolor" />
-                                            </svg>
-                                            <h3 class=" text-xl font-bold dark:text-white ml-2"><?= $P_title ?></h3>
-                                        </div>
-                                        <div style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;" class="text-gray-500 dark:text-gray-400"><?= $P_desc ?></div>
-                                        <button type="button" class="text-orange-600 hover:text-black dark:hover:text-white focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-3xl text-xl px-3 py-2 text-center ml-1 md:ml-1 mt-5 dark:focus:ring-orange-600 ">EDIT 
-                                        </button>
-                                    </div>
-                            <?php
-                                        }
-                                    } else {
-                                        echo '<h3 class="text-left mr-96 text-gray-700 tracking-widest dark:text-white font-mono font-bold ">YOU HAVE NOT POSTED ANY PROJECT YET</h3>';
-                                    }
-                            ?>
-                        </div>
-
-                    <?php else : ?>
-                        <h3 class="text-left mr-96 text-gray-700 tracking-widest dark:text-white font-mono font-bold ">MY PROPOSALS</h3>
-                    </div>
-                    <div class="grid grid-cols-3 gap-10">
-
-                        <?php
-                                    $conn = mysqli_connect("localhost", "root", "", "peoplepertask");
-                                    $sql = 'SELECT* FROM projects WHERE UserID =' . $_SESSION["UserID"];
-                                    $result = mysqli_query($conn, $sql);
-                                    if (mysqli_num_rows($result) > 0) {
-                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            $P_id = $row['ProjectID'];
                                             $P_title = $row['ProjectTitle'];
                                             $P_desc = $row['Description'];
 
@@ -210,25 +175,84 @@ session_start();
                                         </svg>
                                         <h3 class=" text-xl font-bold dark:text-white ml-2"><?= $P_title ?></h3>
                                     </div>
-                                    <p class="text-gray-500 dark:text-gray-400"><?= $P_desc ?></p>
+                                    <div class="text-gray-500 dark:text-gray-400"><?= $P_desc ?></div>
                                     <button type="button" class="text-orange-600 hover:text-black dark:hover:text-white focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-3xl text-xl px-3 py-2 text-center ml-1 md:ml-1 mt-5 dark:focus:ring-orange-600 ">APPLY NOW
                                     </button>
                                 </div>
                         <?php
                                         }
                                     } else {
-                                        echo '<h3 class="text-left mr-96 text-gray-700 tracking-widest dark:text-white font-mono font-bold ">YOU HAVE NOT PROPOSED FOR ANY PROJECT YET</h3>';
+                                        echo '<h3 class="text-left mr-96 text-gray-700 tracking-widest dark:text-white font-mono font-bold ">YOU HAVE NOT POSTED ANY PROJECT YET</h3>';
                                     }
                         ?>
-                    <?php endif ?>
-                <?php endif ?>
                     </div>
 
+                <?php else : ?>
+                    <h3 class="text-left mr-96 text-gray-700 tracking-widest dark:text-white font-mono font-bold ">MY PROPOSALS</h3>
+                        </div>
+                        <div class="grid grid-cols-3 gap-10">
 
-                    <!-- End of Experience and education grid -->
+                            <?php
+                                    $conn = mysqli_connect("localhost", "root", "", "peoplepertask");
+                                    $id_finder = 'SELECT FreelanceID FROM freelances WHERE UserID = ' . $_SESSION["UserID"];
+                                    $id_finder_result = mysqli_query($conn, $id_finder);
+                                    $id_finder_row = mysqli_fetch_assoc($id_finder_result);
+                                    $FreelanceID = $id_finder_row['FreelanceID'];
+                                    $sql = 'SELECT projects.*, offers.status
+                                FROM projects
+                                INNER JOIN offers ON projects.ProjectID = offers.ProjectID
+                                WHERE offers.FreelanceID = ' . $FreelanceID;
+
+                                    $result = mysqli_query($conn, $sql);
+
+                                    if ($result) {
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            $P_id = $row['ProjectID'];
+                                            $P_title = $row['ProjectTitle'];
+                                            $P_desc = $row['Description'];
+                                            $proposalStatus = $row['status'];
+
+                            ?>
+
+                                    <div class="w-64 mt-6 bg-white p-8 border border-gray-300 dark:border-gray-700  rounded-lg dark:bg-gray-800 shadow-md">
+                                        <div class="flex justify-between items-center content-center mb-4 w-fit h-fit rounded-full lg:h-fit lg:w-fit  ">
+                                            <svg width="40" height="42" viewBox="0 0 37 39" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[#00373E] dark:text-white">
+                                                <path d="M23.3543 23.5229L36.3887 0.6875H27.6543L14.5863 23.5145C14.57 23.5346 14.561 23.5598 14.561 23.5858C14.561 23.6118 14.57 23.637 14.5863 23.6572L22.8924 38.2537C22.926 38.3125 22.9596 38.3125 23.0268 38.3125H31.6855L23.3459 23.6404C23.3391 23.6213 23.3363 23.601 23.3377 23.5808C23.3392 23.5605 23.3448 23.5408 23.3543 23.5229ZM15.6361 16.1574L10.6895 7.49023C10.673 7.4611 10.6482 7.43754 10.6183 7.42257C10.5884 7.40761 10.5547 7.40193 10.5215 7.40625H2.45898L7.40566 16.1742C7.41663 16.1948 7.41962 16.2187 7.41406 16.2414L0.611328 27.5625H8.74102C8.76856 27.566 8.7965 27.5605 8.8207 27.5469C8.8449 27.5333 8.86407 27.5123 8.87539 27.4869L15.6361 16.2582C15.6445 16.2251 15.6445 16.1905 15.6361 16.1574Z" fill="currentcolor" />
+                                            </svg>
+                                            <a href="./single_page.php?id=<?= $P_id ?>">
+                                                <h3 class=" text-xl font-bold dark:text-white ml-2"><?= $P_title ?></h3>
+                                            </a>
+                                        </div>
+                                        <div style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;" class="text-gray-500 dark:text-gray-400"><?= $P_desc ?></div>
+                                        <?php if ($proposalStatus === 'approved') : ?>
+                                            <div style="background-color: green;" class="w-fit mt-5 rounded-full text-white py-1.5 px-3 text-xs font-semibold">
+                                                Assigned
+                                            </div>
+                                        <?php elseif ($proposalStatus === 'denied') : ?>
+                                            <div style="background-color: Red;" class="w-fit mt-5 rounded-full text-white py-1.5 px-3 text-xs font-semibold">
+                                                Rejected
+                                            </div>
+                                        <?php else : ?>
+                                            <div style="background-color: Gray;" class="w-fit mt-5 rounded-full text-black py-1.5 px-3 text-xs font-semibold">
+                                                Pending
+                                            </div>
+                                        <?php endif ?>
+                                    </div>
+                            <?php
+                                        }
+                                    } else {
+                                        echo '<h3 class="text-left mr-96 text-gray-700 tracking-widest dark:text-white font-mono font-bold ">YOU HAVE NOT PROPOSED FOR ANY PROJECT YET</h3>';
+                                    }
+                            ?>
+                        </div>
+
+                    <?php endif ?>
+                <?php endif ?>
+
+                <!-- End of Experience and education grid -->
+                    </div>
+                    <!-- End of profile tab -->
                 </div>
-                <!-- End of profile tab -->
-            </div>
             </div>
             </div>
         </section>
